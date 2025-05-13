@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { store } from './store/store.js'
 import PatientLogin from "./authentication/PatientLogin.jsx";
 import HomePage from './home/HomePage.jsx';
+import PatientRegistration from './authentication/PatientRegistration.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,10 +21,10 @@ const router = createBrowserRouter([
     path: "/patient-login",
     element: <PatientLogin />,
   },
-//   {
-//     path: "/signup",
-//     element: <Signup />,
-//   },
+ {
+      path: "/patient/register",
+     element: <PatientRegistration/>,
+  },
 //   {
 //     path: "/user-profile",
 //     element: <UserProfile />,
