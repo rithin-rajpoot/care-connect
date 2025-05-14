@@ -1,12 +1,17 @@
 import React ,{useState} from 'react';
 import { Link } from "react-router-dom";
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff,ArrowLeft } from 'lucide-react';
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 const PatientRegistration = () => {
  const [inputType,setInputType] = useState(true);
  const [showPassword,setShowPassword] = useState(true)
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="  rounded-lg shadow-md p-8 w-full max-w-md">
+    <>
+    <Navbar/>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 ">
+      <Link to="/" className="flex items-center relative md:right-38 sm:right-35"><ArrowLeft className="w-6 h-6 cursor-pointer text-gray-700" /> Back to Home</Link>
+      <div className="rounded-lg shadow-md p-8 w-full max-w-md">
         {/* Heading */}
         <h2 className="text-2xl font-bold text-center text-gray-800">Patient Registration</h2>
         <p className="text-sm text-center text-gray-500 mb-6">Create your account to book appointments</p>
@@ -94,6 +99,8 @@ const PatientRegistration = () => {
         </p>
       </div>
     </div>
+     <Footer/>
+     </>
   );
 };
 
