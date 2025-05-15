@@ -9,6 +9,8 @@ import {
   Search,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -18,6 +20,8 @@ const HomePage = () => {
   };
 
   return (
+    <>
+     <Navbar/>
     <div>
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-blue-200 to-white py-16 md:py-24 px-[6rem]">
@@ -323,6 +327,8 @@ const HomePage = () => {
         </div>
       </section>
     </div>
+    <Footer/>
+     </>
   );
 };
 
