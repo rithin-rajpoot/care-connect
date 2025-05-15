@@ -46,7 +46,7 @@ const HomePage = () => {
                 >
                   Register Now
                 </Link>
-                <Link to="/login" className="btn btn-outline btn-lg">
+                <Link to="/patient-login" className="btn btn-outline btn-lg">
                   Login
                 </Link>
               </div>
