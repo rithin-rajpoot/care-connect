@@ -1,28 +1,45 @@
 import React ,{useState} from 'react';
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import { Eye, EyeOff,ArrowLeft } from 'lucide-react';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useDispatch, useSelector } from 'react-redux';
+import { registerPatientThunk } from '../store/slice/patient/patientThunk';
+
 const PatientRegistration = () => {
  const [inputType,setInputType] = useState(true);
  const [showPassword,setShowPassword] = useState(true)
+const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+ const { isAuthenticated} = useSelector((state) => state.patientReducer);
+
  const [formData,setFormData] = useState({
     fullName:"",
+    username:"",
     email:"",
     password:"",
-    d_o_b:"",
+    DOB:"",
     gender:"",
-    ph_no:"",
+    address:"",
  })
 
  const handleInputChange = (e)=> {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-const handlePatientRegistration = ()=>{
-    alert("successfully registered");
+const handlePatientRegistration = async ()=>{
+    const response = await dispatch(registerPatientThunk(formData));
+    if (response?.payload?.success) {
+      navigate("/");
+    }
 }
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
   return (
     <>
     <Navbar/>

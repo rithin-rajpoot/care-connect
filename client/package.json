@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.1",
     "@tailwindcss/vite": "^4.1.6",
+    "axios": "^1.9.0",
     "daisyui": "^5.0.35",
     "framer-motion": "^12.11.0",
     "lucide-react": "^0.510.0",

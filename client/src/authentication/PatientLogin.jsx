@@ -3,19 +3,26 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Mail, Phone, KeyRound, Eye, EyeOff } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginPatientThunk } from "../store/slice/patient/patientThunk";
 
 const PatientLogin = () => {
+
+  const { isAuthenticated } = useSelector(state=>state.patientReducer);
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
   const [otp, setOtp] = useState(['', '', '', '']);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [method, setMethod] = useState('email');
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+ 
   const [formData, setFormData] = useState({
-    identifier: '',
+    username: '',
     password: ''
   });
   
-  const navigate = useNavigate();
+
   const location = useLocation();
 
   const handleMethodChange = (e) => {
@@ -96,21 +103,20 @@ const PatientLogin = () => {
       return;
     }
     
-    try {
       setIsSubmitting(true);
-      // Mock API call for login
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      alert('Login successful!');
-      
-      // Get the redirect path from the location state or default to dashboard
-      const from = location.state?.from?.pathname || '/patient/dashboard';
-      navigate(from);
-    } catch (error) {
-      alert('Login failed. Please check your credentials.');
-    } finally {
+        const response = await dispatch(loginPatientThunk(formData));
+        if (response?.payload?.success) {
+          navigate("/");
+        } 
       setIsSubmitting(false);
-    }
   };
+
+
+  useEffect(() => {
+      if (isAuthenticated) {
+        navigate("/");
+      }
+  }, [isAuthenticated]);
 
   return (
     <>

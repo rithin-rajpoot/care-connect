@@ -1,0 +1,86 @@
+import { createSlice } from '@reduxjs/toolkit'
+import { getPatientProfileThunk, loginPatientThunk, logoutPatientThunk, registerPatientThunk } from './patientThunk'
+
+const initialState = {
+    isAuthenticated: false,
+    patientProfile: null,
+    loading: false,
+    opBookings:[]
+}
+
+const patientSlice = createSlice({
+    name: 'patient',
+    initialState,
+    reducers: {
+        bookOp:()=>{
+           // book op Here
+        },
+    },
+
+    extraReducers: (builder) => {
+        // Login patient
+        builder.addCase(loginPatientThunk.pending, (state, action) => {
+            state.loading = true;
+        });
+
+        builder.addCase(loginPatientThunk.fulfilled, (state, action) => { // action.payload => contains the data returned from loginUserThunk after fetching 
+            state.patientProfile = action.payload?.responseData?.patient // store the data fetched from backend
+            state.isAuthenticated = true;
+            state.loading = false;
+        });
+
+        builder.addCase(loginPatientThunk.rejected, (state, action) => { // action.payload => contains the data returned from rejectWithValue()
+            state.loading = false;
+        });
+
+
+        // Sign up user
+        builder.addCase(registerPatientThunk.pending, (state, action) => {
+            state.loading = true;
+        });
+
+        builder.addCase(registerPatientThunk.fulfilled, (state, action) => {
+            state.patientProfile = action.payload?.responseData?.newPatient
+            state.isAuthenticated = true;
+            state.loading = false;
+        });
+
+        builder.addCase(registerPatientThunk.rejected, (state, action) => {
+            state.loading = false;
+        });
+
+
+        // get patient profile
+        builder.addCase(getPatientProfileThunk.pending, (state, action) => {
+             state.loading = true;
+        });
+
+        builder.addCase(getPatientProfileThunk.fulfilled, (state, action) => {
+            state.isAuthenticated = true;
+            state.patientProfile = action.payload?.responseData;
+            state.loading = false;
+        });
+
+        builder.addCase(getPatientProfileThunk.rejected, (state, action) => {
+            state.loading = false;
+        });
+
+        // Logout
+        builder.addCase(logoutPatientThunk.pending, (state, action) => {
+            state.loading = true;
+        });
+
+        builder.addCase(logoutPatientThunk.fulfilled, (state, action) => {
+            state.patientProfile = null; // reset state as he/she is logged out
+            state.isAuthenticated = false;
+            state.loading = false;
+        });
+
+        builder.addCase(logoutPatientThunk.rejected, (state, action) => {
+            state.loading = false;
+        });
+    },
+})
+export const { /* functions in reducers  */ } = patientSlice.actions;
+
+export default patientSlice.reducer
