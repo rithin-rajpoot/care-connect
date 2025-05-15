@@ -6,9 +6,29 @@ import Footer from '../components/Footer'
 const PatientRegistration = () => {
  const [inputType,setInputType] = useState(true);
  const [showPassword,setShowPassword] = useState(true)
+ const [formData,setFormData] = useState({
+    fullName:"",
+    email:"",
+    password:"",
+    d_o_b:"",
+    gender:"",
+    ph_no:"",
+ })
+
+ const handleInputChange = (e)=> {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+const handlePatientRegistration = ()=>{
+    alert("successfully registered");
+}
+
   return (
     <>
     <Navbar/>
+    <form onSubmit={handlePatientRegistration}>
+
+    
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 ">
       <Link to="/" className="flex items-center relative md:right-38 sm:right-35"><ArrowLeft className="w-6 h-6 cursor-pointer text-gray-700" /> Back to Home</Link>
       <div className="rounded-lg shadow-md p-8 w-full max-w-md">
@@ -20,7 +40,7 @@ const PatientRegistration = () => {
         {/* Full Name */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-          <input type="text" placeholder="Enter your full name" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          <input type="text" placeholder="Enter your full name" name="fullName" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" onChange={handleInputChange}/>
         </div>
 
         {/* Registration Method */}
@@ -43,13 +63,13 @@ const PatientRegistration = () => {
             {/* Email */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-          <input type="email" placeholder="Enter your email" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          <input type="email" placeholder="Enter your email" name="email" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" onChange={handleInputChange} />
         </div>
 
         {/* Password */}
         <div className="mb-4 relative">
           <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-          <input type= {showPassword ? "text" : "password"} placeholder="Create a password" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          <input type= {showPassword ? "text" : "password"} name = "password" placeholder="Create a password" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" onChange={handleInputChange} />
           {showPassword ? <EyeOff size={22} className="text-black absolute bottom-2 right-2" onClick={()=>{setShowPassword(!showPassword)}}/>: <Eye size={22} className="text-black absolute bottom-2 right-2" onClick={()=>{setShowPassword(!showPassword)}}/>}
         </div>
 
@@ -57,11 +77,11 @@ const PatientRegistration = () => {
         <div className="flex gap-4 mb-6">
           <div className="w-1/2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth (Optional)</label>
-            <input type="date" placeholder="dd-mm-yyyy" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            <input type="date" placeholder="dd-mm-yyyy" name="d_o_b" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" onChange={handleInputChange}/>
           </div>
           <div className="w-1/2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Gender (Optional)</label>
-            <select className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <select name="gender" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"onChange={handleInputChange}>
               <option>Male</option>
               <option>Female</option>
               <option>Other</option>
@@ -72,8 +92,8 @@ const PatientRegistration = () => {
           {/* Mobile Number */}
             <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
-            <input
-                type="tel"
+            <input onChange={handleInputChange}
+                type="tel" name="ph_no"
                 placeholder="Enter your mobile number"
                 className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
@@ -91,7 +111,7 @@ const PatientRegistration = () => {
         }
 
         {/* Continue Button */}
-        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition">Continue</button>
+        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition">Continue</button>
 
         {/* Login Link */}
         <p className="text-center text-sm text-gray-600 mt-4">
@@ -99,6 +119,8 @@ const PatientRegistration = () => {
         </p>
       </div>
     </div>
+
+    </form>
      <Footer/>
      </>
   );
