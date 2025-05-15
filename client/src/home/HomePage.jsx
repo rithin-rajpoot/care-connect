@@ -46,8 +46,8 @@ const HomePage = () => {
                 >
                   Register Now
                 </Link>
-                <Link to="/about" className="btn btn-outline btn-lg">
-                  Learn More
+                <Link to="/login" className="btn btn-outline btn-lg">
+                  Login
                 </Link>
               </div>
 
