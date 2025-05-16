@@ -1,5 +1,6 @@
 import express from 'express';
 import { app, server } from './socket/socket.js'
+import cookieParser from 'cookie-parser';
 
 // Database connection
 import {connectDB} from "./db/db.connection.js";
@@ -12,6 +13,7 @@ app.use(cors({
     credentials: true,
 }));
 
+app.use(cookieParser()) // for parsing cookie in middleware's
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -21,6 +23,9 @@ app.get('/', (req, res) => {
 // routes 
 
 
+// error.middleware
+import { errorMiddleware } from './middlewares/error.middleware.js';
+app.use(errorMiddleware);
 
 // Start the server 
 const port = process.env.PORT || 5000
