@@ -23,7 +23,7 @@ const Navbar = () => {
       {/* Auth Buttons */}
       <div className="md:flex space-x-3 hidden">
         <Link to="/patient-login" className="px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-100">Login</Link>
-        <Link to="/patient/register" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Register</Link>
+        <Link to="/patient-register" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Register</Link>
       </div>
     </nav>
   );

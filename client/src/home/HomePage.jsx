@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
+import { LuNotepadText } from "react-icons/lu";
+import { IoCallOutline } from "react-icons/io5";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { LuActivity } from "react-icons/lu";
 import {
   ArrowRight,
   Clock,
@@ -41,8 +46,8 @@ const HomePage = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Link
-                  to="/patient/register"
-                  className="btn bg-blue-600 hover:bg-blue-700 btn-lg"
+                  to="/patient-register"
+                  className="btn bg-blue-600 hover:bg-blue-700 btn-lg "
                 >
                   Register Now
                 </Link>
@@ -143,20 +148,8 @@ const HomePage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl text-blue-600 mb-4">
+               <FiUser />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Patient Registration
@@ -168,24 +161,8 @@ const HomePage = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                  <path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"></path>
-                  <path d="M12 11h4"></path>
-                  <path d="M12 16h4"></path>
-                  <path d="M8 11h.01"></path>
-                  <path d="M8 16h.01"></path>
-                </svg>
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl text-blue-600 mb-4">
+               <LuNotepadText />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Serial Number Booking
@@ -197,19 +174,8 @@ const HomePage = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <path d="M12 20v-6M12 8V4M20 12h-4M8 12H4M19.45 19.45l-2.83-2.83M19.45 4.55l-2.83 2.83M7.38 7.38L4.55 4.55M7.38 16.62l-2.83 2.83"></path>
-                </svg>
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl text-blue-600 mb-4">
+                <Clock/>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Live Queue Updates
@@ -220,19 +186,8 @@ const HomePage = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl text-blue-600 mb-4">
+                <IoCallOutline />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Smart Notifications
@@ -244,23 +199,8 @@ const HomePage = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"></path>
-                  <path d="M16 3v18"></path>
-                  <path d="M8 3v18"></path>
-                  <path d="M3 16h18"></path>
-                  <path d="M3 8h18"></path>
-                </svg>
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl text-blue-600 mb-4">
+                <LuLayoutDashboard />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Hospital Dashboard
@@ -272,19 +212,8 @@ const HomePage = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                </svg>
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl text-blue-600 mb-4">
+               <LuActivity />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Doctor Controls
@@ -311,13 +240,13 @@ const HomePage = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
-                to="/patient/register"
+                to="/patient-register"
                 className="btn bg-white text-blue-600 hover:bg-blue-50 shadow-lg"
               >
                 Register as Patient
               </Link>
               <Link
-                to="/hospital/register"
+                to="/hospital-register"
                 className="btn bg-blue-700 text-white hover:bg-blue-800 shadow-lg"
               >
                 Register Hospital <ArrowRight size={18} className="ml-2" />
