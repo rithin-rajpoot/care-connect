@@ -14,13 +14,13 @@ export const registerHospitalAndAdmin = asyncHandler(async (req, res, next) => {
     await hospital.save();
 
     // 2. Create Admin linked to that hospital
-    const hashedPassword = await bcrypt.hash(adminDetails.password, 10);
+    const hashedPassword = await bcrypt.hash(adminDetails.adminPassword, 10);
 
     const newAdmin = new Admin({
         hospitalId: hospital._id,
-        fullName: adminDetails.fullName,
-        email: adminDetails.email,
-        password: hashedPassword,
+        adminName: adminDetails.adminName,
+        adminEmail: adminDetails.adminEmail,
+        adminPassword: hashedPassword,
     });
 
     await newAdmin.save();
@@ -55,17 +55,17 @@ export const registerHospitalAndAdmin = asyncHandler(async (req, res, next) => {
 
 export const adminLogin = asyncHandler(
     async (req, res, next) => {
-        const { email, password } = req.body;
-        if (!email || !password) {
+        const { adminEmail, adminPassword } = req.body;
+        if (!adminEmail || !adminPassword) {
             return next(new errorHandler("Your password or username is empty", 400))
         }
 
-        const admin = await Admin.findOne({ email });
+        const admin = await Admin.findOne({ adminEmail });
         if (!admin) {
             return next(new errorHandler("Your password or username is Invalid!", 400))
         }
 
-        const isValidPassword = await bcrypt.compare(password, admin.password);
+        const isValidPassword = await bcrypt.compare(adminPassword, admin.adminPassword);
         if (!isValidPassword) {
             return next(new errorHandler("Your password or username is Invalid!", 400))
         }

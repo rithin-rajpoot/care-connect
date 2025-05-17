@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Mail, Phone, KeyRound, Eye, EyeOff } from 'lucide-react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginPatientThunk } from "../store/slice/patient/patientThunk";
+import { loginPatientThunk } from "../../store/slice/patient/patientThunk";
 
 const PatientLogin = () => {
 

@@ -1,10 +1,10 @@
 import React ,{useEffect, useState} from 'react';
 import { Link ,useNavigate} from "react-router-dom";
 import { Eye, EyeOff,ArrowLeft } from 'lucide-react';
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import Navbar from '../../components/Navbar'
+import Footer from '../../components/Footer'
 import { useDispatch, useSelector } from 'react-redux';
-import { registerPatientThunk } from '../store/slice/patient/patientThunk';
+import { registerPatientThunk } from '../../store/slice/patient/patientThunk';
 
 const PatientRegistration = () => {
  const [inputType,setInputType] = useState(true);

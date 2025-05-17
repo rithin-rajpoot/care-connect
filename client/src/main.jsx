@@ -4,10 +4,11 @@ import App from './App.jsx'
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { store } from './store/store.js'
-import PatientLogin from "./authentication/PatientLogin.jsx";
+import PatientLogin from "./authentication/patient/PatientLogin.jsx";
 import HomePage from './home/HomePage.jsx';
-import PatientRegistration from './authentication/PatientRegistration.jsx';
-
+import PatientRegistration from './authentication/patient/PatientRegistration.jsx';
+import HospitalRegistration from './authentication/hospital/HospitalRegistration.jsx';
+import HospitalLogin from './authentication/hospital/HospitalLogin.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +26,14 @@ const router = createBrowserRouter([
       path: "/patient-register",
      element: <PatientRegistration/>,
   },
+  {
+    path:"/hospital-login",
+    element:<HospitalLogin/>
+  },
+  {
+     path:"/hospital-register",
+     element:<HospitalRegistration/>
+  }
 //   {
 //     path: "/user-profile",
 //     element: <UserProfile />,
