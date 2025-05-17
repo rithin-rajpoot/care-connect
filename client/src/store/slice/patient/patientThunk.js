@@ -22,12 +22,14 @@ export const loginPatientThunk = createAsyncThunk('patient/login',
 );
 
 export const registerPatientThunk = createAsyncThunk('patient/register',
-    async ({ fullName,password, email, DOB ,gender,address}, { rejectWithValue }) => {
+    async ({ fullName,username,email,phno,password,DOB,gender,address,}, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.post('/patient/register', {
                 fullName,
-                password,
+                username,
                 email,
+                phno,
+                password,
                 DOB,
                 gender,
                 address,
