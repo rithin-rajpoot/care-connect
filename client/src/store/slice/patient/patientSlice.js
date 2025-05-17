@@ -23,13 +23,15 @@ const patientSlice = createSlice({
             state.loading = true;
         });
 
-        builder.addCase(loginPatientThunk.fulfilled, (state, action) => { // action.payload => contains the data returned from loginUserThunk after fetching 
-            state.patientProfile = action.payload?.responseData?.patient // store the data fetched from backend
+        builder.addCase(loginPatientThunk.fulfilled, (state, action) => { 
+            state.patientProfile = action?.payload?.responseData?.newPatient 
+            console.log("fullfilled:",action?.payload?.responseData);
             state.isAuthenticated = true;
             state.loading = false;
+
         });
 
-        builder.addCase(loginPatientThunk.rejected, (state, action) => { // action.payload => contains the data returned from rejectWithValue()
+        builder.addCase(loginPatientThunk.rejected, (state, action) => { 
             state.loading = false;
         });
 

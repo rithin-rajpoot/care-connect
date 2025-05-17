@@ -26,6 +26,8 @@ export const registerPatient = asyncHandler(async (req, res, next) => {
         phone,
     }
 
+    // console.log("patientData:",patientData);
+
     const hashedPassword = await bcrypt.hash(password, 10);
     patientData.password = hashedPassword;
     const newPatient = new Patient(patientData);
@@ -44,7 +46,7 @@ export const registerPatient = asyncHandler(async (req, res, next) => {
         .cookie("token", token, {
             expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
             httpOnly: true,
-            //   secure: true,
+            secure: true,
             sameSite: "none",
         })
         .json({
@@ -84,7 +86,7 @@ export const patientLogin = asyncHandler(
             .cookie("token", token, {
                 expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
                 httpOnly: true,
-                // secure: true,
+                secure: true,
                 sameSite: 'none'
             })
             .json({

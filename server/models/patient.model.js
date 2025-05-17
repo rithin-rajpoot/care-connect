@@ -6,8 +6,8 @@ const patientSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true, },
     password: { type: String, required: true },
     phone: { type: String, required: true, match: /^[0-9+]{10,15}$/, },
-    DOB: { type: Date, required: true,default: '' },
-    gender: { type: String, required: true, default: '' },
+    DOB: { type: Date,default: '' },
+    gender: { type: String, default: '' },
     address: { type: String, default: '' },
     createdAt: { type: Date, default: Date.now },
 });

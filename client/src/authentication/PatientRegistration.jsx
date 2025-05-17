@@ -60,7 +60,7 @@ const dispatch = useDispatch();
     fullName:"",
     username:"",
     email:"",
-    phno:"",
+    phone:"",
     password:"",
     DOB:"",
     gender:"",
@@ -71,7 +71,8 @@ const dispatch = useDispatch();
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-const handlePatientRegistration = async ()=>{
+const handlePatientRegistration = async (e)=>{
+    e.preventDefault()
     const response = await dispatch(registerPatientThunk(formData));
     if (response?.payload?.success) {
       navigate("/");
@@ -109,7 +110,7 @@ const handlePatientRegistration = async ()=>{
         </div>
          <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">Mobile No:</label>
-          <input type="tel" placeholder="ph no" name="phno" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" onChange={handleInputChange}/>
+          <input type="tel" placeholder="ph no" name="phone" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" onChange={handleInputChange}/>
         </div>
 
 
@@ -148,14 +149,15 @@ const handlePatientRegistration = async ()=>{
         <div className="flex gap-4 mb-6">
           <div className="w-1/2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth (Optional)</label>
-            <input type="date" placeholder="dd-mm-yyyy" name="d_o_b" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" onChange={handleInputChange}/>
+            <input type="date" placeholder="dd-mm-yyyy" name="DOB" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" onChange={handleInputChange}/>
           </div>
           <div className="w-1/2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Gender (Optional)</label>
-            <select name="gender" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"onChange={handleInputChange}>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
+            <select name="gender" value = {formData.gender} className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"onChange={handleInputChange}>
+              <option value="">select-gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
           </div>
         </div>

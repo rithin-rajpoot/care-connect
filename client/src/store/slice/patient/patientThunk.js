@@ -22,20 +22,21 @@ export const loginPatientThunk = createAsyncThunk('patient/login',
 );
 
 export const registerPatientThunk = createAsyncThunk('patient/register',
-    async ({ fullName,username,email,phno,password,DOB,gender,address,}, { rejectWithValue }) => {
+    async ({ fullName,username,email,phone,password,DOB,gender,address,}, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.post('/patient/register', {
                 fullName,
                 username,
                 email,
-                phno,
+                phone,
                 password,
                 DOB,
                 gender,
                 address,
             });
+            // console.log("saved:",response?.data?.responseData);
             toast.success("Account Created Successfully!!");
-            return response.data;
+            return response?.data;
 
         } catch (error) {
             const errorOutput = error?.response?.data?.errMessage;
