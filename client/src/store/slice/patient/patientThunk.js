@@ -4,17 +4,20 @@ import { axiosInstance } from '../../../lib/axiosInstance.js'
 
 
 export const loginPatientThunk = createAsyncThunk('patient/login',
-    async ({ username, password }, { rejectWithValue }) => {
+    async ({ email, password }, { rejectWithValue }) => {
         try {
+            // console.log(email,password);
             const response = await axiosInstance.post('/patient/login', {
-                username,
+                email,
                 password
             });
+            // console.log(response?.data)
             toast.success("Login successful")
-            return response.data;
+            return response?.data;
 
         } catch (error) {
             const errorOutput = error?.response?.data?.errMessage;
+            console.log("error in loginPatientThunk:",errorOutput)
             toast.error(errorOutput);
             return rejectWithValue(errorOutput)
         }

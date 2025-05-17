@@ -18,7 +18,7 @@ const PatientLogin = () => {
   const navigate = useNavigate();
  
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: ''
   });
   
@@ -92,7 +92,8 @@ const PatientLogin = () => {
     }
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault()
     if (method === 'phone' && isVerifyingOtp) {
       await verifyOtpAndLogin();
       return;
@@ -166,10 +167,9 @@ const PatientLogin = () => {
                 <div className="relative">
                   <input
                     type={method === 'email' ? 'email' : 'tel'}
-                    name="identifier"
+                    name="email"
                     className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                     placeholder={method === 'email' ? 'Enter your email' : 'Enter 10-digit mobile number'}
-                    value={formData.identifier}
                     onChange={handleInputChange}
                   />
                 </div>

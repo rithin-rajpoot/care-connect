@@ -24,8 +24,8 @@ const patientSlice = createSlice({
         });
 
         builder.addCase(loginPatientThunk.fulfilled, (state, action) => { 
-            state.patientProfile = action?.payload?.responseData?.newPatient 
-            console.log("fullfilled:",action?.payload?.responseData);
+            state.patientProfile = action?.payload?.responseData?.patient 
+            // console.log("Logged In:",state.patientProfile)
             state.isAuthenticated = true;
             state.loading = false;
 
@@ -42,7 +42,7 @@ const patientSlice = createSlice({
         });
 
         builder.addCase(registerPatientThunk.fulfilled, (state, action) => {
-            state.patientProfile = action.payload?.responseData?.newPatient
+            state.patientProfile = action.payload?.responseData?.newPatient;
             state.isAuthenticated = true;
             state.loading = false;
         });
@@ -73,7 +73,7 @@ const patientSlice = createSlice({
         });
 
         builder.addCase(logoutPatientThunk.fulfilled, (state, action) => {
-            state.patientProfile = null; // reset state as he/she is logged out
+            state.patientProfile = null;
             state.isAuthenticated = false;
             state.loading = false;
         });
