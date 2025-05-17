@@ -25,6 +25,9 @@ app.get('/', (req, res) => {
 import patientRouter from './routes/patient.router.js';
 app.use('/careconnect/api/patient', patientRouter);
 
+import adminRouter from './routes/admin.router.js';
+app.use('/careconnect/api/admin', adminRouter);
+
 // error.middleware
 import { errorMiddleware } from './middlewares/error.middleware.js';
 app.use(errorMiddleware);
