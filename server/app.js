@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
 
 // routes 
 
+import patientRouter from './routes/patient.router.js';
+app.use('/careconnect/api/patient', patientRouter);
 
 // error.middleware
 import { errorMiddleware } from './middlewares/error.middleware.js';
