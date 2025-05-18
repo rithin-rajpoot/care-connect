@@ -152,10 +152,11 @@ const PatientLogin = () => {
       }));
       
       if (response?.payload?.success) {
-        navigate("/");
+        navigate("/patient-dashboard");
       } else {
+        // console.log(response?.payload)
         setErrors({ 
-          general: response?.payload?.message || "Login failed. Please check your credentials." 
+          general: response?.payload || "Login failed. Please check your credentials." 
         });
       }
     } catch (error) {
@@ -192,7 +193,7 @@ const PatientLogin = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      navigate("/patient-dashboard");
     }
   }, [isAuthenticated, navigate]);
 
@@ -437,7 +438,7 @@ const PatientLogin = () => {
             <p className="text-center text-sm text-gray-600 mt-6">
               Don't have an account?{" "}
               <Link
-                to="/patient/register"
+                to="/patient-register"
                 className="text-blue-500 hover:underline font-medium"
               >
                 Register here

@@ -42,7 +42,7 @@ const patientSlice = createSlice({
         });
 
         builder.addCase(registerPatientThunk.fulfilled, (state, action) => {
-            state.patientProfile = action.payload?.responseData?.newPatient;
+            state.patientProfile = action.payload?.responseData?.patient;
             state.isAuthenticated = true;
             state.loading = false;
         });

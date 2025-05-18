@@ -6,31 +6,48 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginHospitalThunk } from '../../store/slice/hospital/hospitalThunk';
 import Navbar from '../../components/Navbar.jsx';
 import Footer from '../../components/Footer.jsx';
+import {Loader} from 'lucide-react'
 
 const HospitalLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     adminEmail: '',
     adminPassword: '',
   });
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.adminEmail) {
+      newErrors.adminEmail = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.adminEmail)) {
+      newErrors.adminEmail = 'Please enter a valid email address';
+    }
+    if (!formData.adminPassword) {
+      newErrors.adminPassword = 'Password is required';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log(formData);
+    // Optionally clear error as user types
+    setErrors((prev) => ({ ...prev, [e.target.name]: undefined }));
   };
 
   const handleAdminLogin = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     setIsSubmitting(true);
     const response = await dispatch(loginHospitalThunk(formData));
     if (response?.payload?.success) {
-      navigate('/'); // to-do : navigate to hospital/admin dashboard
+      navigate('/hospital-dashboard'); 
     }
     setIsSubmitting(false);
   };
@@ -50,7 +67,7 @@ const HospitalLogin = () => {
             <p className="text-sm text-gray-500 mt-1">Access your hospital dashboard</p>
           </div>
 
-          <form onSubmit={handleAdminLogin} className="space-y-5">
+          <form onSubmit={handleAdminLogin} className="space-y-5" noValidate>
             <div>
               <label htmlFor="identifier" className="block text-sm font-medium text-gray-700 mb-1">
                 Admin Email
@@ -60,13 +77,17 @@ const HospitalLogin = () => {
                   id="identifier"
                   type="email"
                   name="adminEmail"
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`w-full pl-10 pr-4 py-2 border ${errors.adminEmail ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                   placeholder="Enter admin email"
                   value={formData.adminEmail}
                   onChange={handleInputChange}
+                  autoComplete="username"
                 />
                 <Mail size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               </div>
+              {errors.adminEmail && (
+                <p className="text-red-500 text-xs mt-1">{errors.adminEmail}</p>
+              )}
             </div>
 
             <div>
@@ -76,7 +97,7 @@ const HospitalLogin = () => {
                 </label>
                 <Link
                   to="/forgot-password"
-                  className="text-sm text-blue-600 hover:underline"
+                  className="text-sm text-blue-500 hover:underline"
                 >
                   Forgot password?
                 </Link>
@@ -86,28 +107,32 @@ const HospitalLogin = () => {
                   id="password"
                   name="adminPassword"
                   type="password"
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`w-full pl-10 pr-4 py-2 border ${errors.adminPassword ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                   placeholder="Enter your password"
                   value={formData.adminPassword}
                   onChange={handleInputChange}
+                  autoComplete="current-password"
                 />
                 <KeyRound size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               </div>
+              {errors.adminPassword && (
+                <p className="text-red-500 text-xs mt-1">{errors.adminPassword}</p>
+              )}
             </div>
 
             <button
               type="submit"
-              className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-200 disabled:opacity-50"
+              className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition duration-200"
               disabled={isSubmitting}
             >
-              {isSubmitting ? <span className="loader-sm mx-auto" /> : 'Login'}
+              {isSubmitting ? (<Loader className="w-5 h-5 animate-spin text-blue-500" />) : 'Login'}
             </button>
           </form>
 
           <div className="text-center pt-4">
             <p className="text-sm text-gray-600">
               Don't have a hospital account?{' '}
-              <Link to="/hospital-register" className="text-blue-600 hover:underline">
+              <Link to="/hospital-register" className="text-blue-500 hover:underline">
                 Register here
               </Link>
             </p>

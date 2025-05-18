@@ -33,7 +33,7 @@ export const registerHospitalThunk = createAsyncThunk('admin/register',
                     }
             // console.log("inside Thunk:",hospitalData);
             const response = await axiosInstance.post('/admin/register', hospitalData);
-            //console.log("Registration Success")
+            console.log("Registration Success")
             toast.success("Admin registered successful")
              return response?.data;
 

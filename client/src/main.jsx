@@ -9,6 +9,8 @@ import HomePage from './home/HomePage.jsx';
 import PatientRegistration from './authentication/patient/PatientRegistration.jsx';
 import HospitalRegistration from './authentication/hospital/HospitalRegistration.jsx';
 import HospitalLogin from './authentication/hospital/HospitalLogin.jsx';
+import HospitalDashBoard from './dashboards/HospitalDashBoard.jsx';
+import PatientDashBoard from './dashboards/PatientDashBoard.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
   {
      path:"/hospital-register",
      element:<HospitalRegistration/>
+  },
+  {
+    path:"/patient-dashboard",
+    element:<PatientDashBoard/>
+  },
+  {
+    path:"/hospital-dashboard",
+    element:<HospitalDashBoard/>
   }
 //   {
 //     path: "/user-profile",

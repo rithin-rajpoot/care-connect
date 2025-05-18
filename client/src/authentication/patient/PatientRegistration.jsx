@@ -185,10 +185,10 @@ const PatientRegistration = () => {
       
       const response = await dispatch(registerPatientThunk(registrationData));
       if (response?.payload?.success) {
-        navigate("/");
+        navigate("/patient-dashboard");
       } else {
         setErrors({ 
-          general: response?.payload?.message || "Registration failed. Please try again." 
+          general: response?.payload || "Registration failed. Please try again." 
         });
       }
     } catch (error) {
