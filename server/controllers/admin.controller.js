@@ -9,6 +9,12 @@ export const registerHospitalAndAdmin = asyncHandler(async (req, res, next) => {
 
     const { hospitalDetails, adminDetails } = req.body;
 
+    // to do : implement validation for hospitalDetails and adminDetails
+    
+    if (!hospitalDetails || !adminDetails) {
+        return next(new errorHandler("Required fields cannot be empty", 400));
+    }
+
     // 1. Create Hospital
     const hospital = new Hospital(hospitalDetails);
     await hospital.save();

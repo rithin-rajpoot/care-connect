@@ -67,7 +67,7 @@ const HospitalRegistration = () => {
     <>
     <Navbar/>
     <div className="min-h-[90vh] bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center py-6 px-2">
-      <div className="w-fit max-w-2xl bg-white rounded-xl shadow-lg p-6 sm:p-10">
+      <div className="w-fit min-w-[40vw]  max-w-2xl bg-white rounded-xl shadow-lg p-6 sm:p-10">
         <Link to="/" className="flex items-center text-gray-500 hover:text-blue-400 mb-6 transition-colors">
           <ArrowLeft size={18} className="mr-2" />
           Back to Home
@@ -144,12 +144,12 @@ const HospitalRegistration = () => {
               </div>
   
               {/*to-do: drop-down issue solve */}
-              <div className="mb-4 bg-red-900">
+              <div className="mb-4 ">
                 <label htmlFor="type" className="block text-sm font-semibold text-blue-700 mb-1">Hospital Type</label>
                 <select
                   id="type"
                   name="hospitalType"
-                  className="w-full h-fit bg-green-900  py-2 px-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                  className="w-full h-fit   py-2 px-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
                   value={formData.hospitalType}
                   onChange={handleChange}
                 >
