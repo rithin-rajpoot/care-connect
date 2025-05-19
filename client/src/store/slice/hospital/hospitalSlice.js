@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { registerHospitalThunk , loginHospitalThunk} from './hospitalThunk'
+import { registerHospitalThunk , loginHospitalThunk, getAdminProfileThunk} from './hospitalThunk'
 
 const initialState = {
     isAuthenticated: false,
@@ -42,12 +42,24 @@ const  hospitalSlice = createSlice({
            state.loading = false;
            state.hospitalDetails = action?.payload?.responseData?.HospitalDetails
            state.adminDetails = action?.payload?.responseData?.AdminDetails
-          
-        //    console.log("HospitalDetails:",action?.payload?.responseData?.HospitalDetails)
-        //    console.log("AdminDetails:",action?.payload?.responseData?.AdminDetails)
         });
 
         builder.addCase(registerHospitalThunk.rejected, (state, action) => { 
+           state.loading = false;
+        });
+
+        // Get Admin Profile
+        builder.addCase(getAdminProfileThunk.pending, (state, action) => { 
+           state.loading = true
+        });
+
+        builder.addCase(getAdminProfileThunk.fulfilled, (state, action) => { 
+           state.loading = false;
+        //    console.log(action?.payload?.responseData)
+           state.adminDetails = action?.payload?.responseData
+        });
+
+        builder.addCase(getAdminProfileThunk.rejected, (state, action) => { 
            state.loading = false;
         });
     }

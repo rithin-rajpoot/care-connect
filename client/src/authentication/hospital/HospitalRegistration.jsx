@@ -172,7 +172,7 @@ const HospitalRegistration = () => {
         
         if (response?.payload?.success) {
           toast.success("Hospital registered successfully!");
-          navigate("/hospital-dashboard"); // redirect
+          navigate("/admin-dashboard"); // redirect
         } else {
           setErrors({
             ...errors,
