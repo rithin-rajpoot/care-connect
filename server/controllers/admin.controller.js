@@ -4,15 +4,22 @@ import { asyncHandler } from "../utils/asyncHandler.util.js";
 import { errorHandler } from "../utils/errorHandler.util.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import  cloudinary  from "../lib/cloudinary.js";
 
 export const registerHospitalAndAdmin = asyncHandler(async (req, res, next) => {
 
     const { hospitalDetails, adminDetails } = req.body;
-
     // to do : implement validation for hospitalDetails and adminDetails
     
     if (!hospitalDetails || !adminDetails) {
         return next(new errorHandler("Required fields cannot be empty", 400));
+    }
+    console.log("hospitalDetails.logoUrl:",hospitalDetails)
+    if(hospitalDetails.logoUrl && hospitalDetails.logoUrl.length > 0)
+    {
+        const uploadResponse = await cloudinary.uploader.upload(hospitalDetails.logoUrl)
+        console.log("cloudinary URL: ",uploadResponse.secure_url);
+        hospitalDetails.logoUrl = uploadResponse.secure_url
     }
 
     // 1. Create Hospital

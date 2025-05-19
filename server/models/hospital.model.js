@@ -6,7 +6,7 @@ const hospitalSchema = new mongoose.Schema({
   hospitalPhno: { type: String, required: true },
   hospitalEmail: { type: String, required: true },
   hospitalAddress: { type: String, default:'' }, // or { lat, lng } for maps
-  logoUrl: { type: String },
+  logoUrl: { type: String ,default:'' },
   licenseUrl: { type: String },
   createdAt: { type: Date, default: Date.now }
 });
