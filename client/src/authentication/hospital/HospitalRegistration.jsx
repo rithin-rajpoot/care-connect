@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState ,useRef} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Building, Mail, Phone, MapPin, User, KeyRound, CheckCircle, Loader, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Building, Mail, Phone, MapPin, User, KeyRound, CheckCircle, Loader, Eye, EyeOff , Camera } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Footer from '../../components/Footer.jsx';
 import Navbar from '../../components/Navbar.jsx';
@@ -25,6 +25,7 @@ const initialForm = {
   hospitalType: '',
   hospitalEmail: '',
   hospitalPhno: '',
+  logoUrl:'',
   hospitalAddress: '',
   adminName: '',
   adminEmail: '',
@@ -52,7 +53,12 @@ const HospitalRegistration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const imageInputRef = useRef(null);
+  const [image,setImage] = useState(null);
 
+  const handleImageButton = ()=>{
+     imageInputRef.current.click();
+  }
   const validateStep1 = () => {
     const newErrors = {};
     let isValid = true;
@@ -160,6 +166,24 @@ const HospitalRegistration = () => {
       });
     }
   };
+
+ 
+  const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (!file) {return;}
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = async () =>{
+          const base64Image = reader.result;
+          setImage(base64Image);
+          //  console.log(base64Image)
+          setFormData(prevFormData => ({
+             ...prevFormData,
+             logoUrl: base64Image
+          }));
+        }
+      };
 
   const handleHospitalRegistration = async (e) => {
     e.preventDefault();
@@ -362,7 +386,26 @@ const HospitalRegistration = () => {
                   )}
                 </div>
               </div>
-
+              
+          <div className="flex justify-center md:justify-start items-center gap-2 flex-wrap">
+           
+          <div className="relative">
+            <img
+              src={image || "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"}
+              alt="Profile"
+              className="object-cover w-16 h-16 rounded-full border-4 border-gray-700"
+            />
+                <input ref={imageInputRef}
+                  type="file" 
+                  accept="image/*" 
+                  className="hidden"
+                  onChange={handleImageUpload} // <- optional handler
+                  // disabled={isUpdatingProfile} // <- disable input when updating profile
+                />
+          </div>
+               <button className="flex gap-2 items-center bg-blue-500 p-2 text-white rounded-md cursor-pointer" onClick={handleImageButton}> Upload Logo <Camera className="text-white size-5" /></button>
+        </div>
+               
               <div className="mb-8">
                 <label htmlFor="address" className="block text-sm font-semibold mb-1">
                   Hospital Address

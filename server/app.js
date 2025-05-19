@@ -14,7 +14,7 @@ app.use(cors({
 }));
 
 app.use(cookieParser()) // for parsing cookie in middleware's
-app.use(express.json());
+app.use(express.json({ limit: '100mb' }));
 
 app.get('/', (req, res) => {
     res.send("hey")

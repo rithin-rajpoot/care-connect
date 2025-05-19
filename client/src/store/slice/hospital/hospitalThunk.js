@@ -10,7 +10,9 @@ export const registerHospitalThunk = createAsyncThunk('admin/register',
                 hospitalType,
                 hospitalEmail,
                 hospitalPhno,
-                hospitalAddress,adminName,
+                hospitalAddress,
+                logoUrl,
+                adminName,
                 adminEmail,
                 adminPassword,}, { rejectWithValue }) => {
         try {
@@ -23,6 +25,7 @@ export const registerHospitalThunk = createAsyncThunk('admin/register',
                                 hospitalEmail,
                                 hospitalPhno,
                                 hospitalAddress,
+                                logoUrl,
                             },
                 adminDetails:
                             {
@@ -31,7 +34,7 @@ export const registerHospitalThunk = createAsyncThunk('admin/register',
                                 adminPassword,
                             }
                     }
-            // console.log("inside Thunk:",hospitalData);
+            console.log("inside Thunk:",hospitalData);
             const response = await axiosInstance.post('/admin/register', hospitalData);
             console.log("Registration Success")
             toast.success("Admin registered successful")
