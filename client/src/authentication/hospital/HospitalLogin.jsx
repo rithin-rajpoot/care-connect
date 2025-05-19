@@ -47,7 +47,7 @@ const HospitalLogin = () => {
     setIsSubmitting(true);
     const response = await dispatch(loginHospitalThunk(formData));
     if (response?.payload?.success) {
-      navigate('/hospital-dashboard'); 
+      navigate('/admin-dashboard'); 
     }
     setIsSubmitting(false);
   };

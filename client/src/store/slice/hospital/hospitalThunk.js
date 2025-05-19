@@ -70,6 +70,19 @@ export const loginHospitalThunk = createAsyncThunk('admin/login',
     }
 );
 
+export const getAdminProfileThunk = createAsyncThunk('admin/getAdminProfile',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.get('/admin/get-profile');
+            return response.data;
+
+        } catch (error) {
+            const errorOutput = error?.response?.data?.errMessage;
+            return rejectWithValue(errorOutput)
+        }
+    }
+);
+
 
 
 
