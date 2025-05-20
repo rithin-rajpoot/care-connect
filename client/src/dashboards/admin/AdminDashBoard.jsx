@@ -4,15 +4,15 @@ import { UserPlus, User, Settings, LogOut, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ProfileForm from "./ProfileForm.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { getAdminProfileThunk } from "../../store/slice/hospital/hospitalThunk.js";
+import { getAdminProfileThunk, updateHospitalProfileThunk } from "../../store/slice/hospital/hospitalThunk.js";
 
 const AdminDashBoard = () => {
   const [activeTab, setActiveTab] = useState("add-doctor");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { adminDetails } = useSelector((state) => state.hospitalReducer);
-
+  const { adminDetails ,hospitalDetails} = useSelector((state) => state.hospitalReducer);
+  
   useEffect( () => {
      dispatch(getAdminProfileThunk());
   },[])
@@ -24,7 +24,7 @@ const AdminDashBoard = () => {
   };
 
   const handleProfileUpdate = (updatedData) => {
-    
+      dispatch(updateHospitalProfileThunk(updatedData));
   };
 
   return (
@@ -113,10 +113,10 @@ const AdminDashBoard = () => {
             <div className="px-6 py-4 border-b border-gray-200">
               <h3 className="text-lg font-medium text-gray-900 flex items-center space-x-2">
                 <Settings size={20} />
-                <span>Admin Profile</span>
+                <span>Hospital Profile</span>
               </h3>
             </div>
-            <ProfileForm adminData={adminDetails} onUpdate={handleProfileUpdate} />
+            <ProfileForm hospitalData={hospitalDetails} adminData = {adminDetails} onUpdate={handleProfileUpdate} />
           </div>
         )}
       </div>

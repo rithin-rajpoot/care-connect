@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const ProfileForm = ({ adminData, onUpdate }) => {
-  const [formData, setFormData] = useState(adminData);
+const ProfileForm = ({ hospitalData, onUpdate }) => {
+  const [formData, setFormData] = useState(hospitalData);
   const [isEditing, setIsEditing] = useState(false);
 
   const handleSubmit = (e) => {
@@ -11,7 +11,7 @@ const ProfileForm = ({ adminData, onUpdate }) => {
   };
 
   const handleCancel = () => {
-    setFormData(adminData);
+    setFormData(hospitalData);
     setIsEditing(false);
   };
 
@@ -21,13 +21,13 @@ const ProfileForm = ({ adminData, onUpdate }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Full Name
+            Hospital Name
             </label>
             <input
               type="text"
-              value={formData?.adminName}
+              value={formData?.hospitalName}
               onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
+                setFormData({ ...formData, hospitalName: e.target.value })
               }
               disabled={!isEditing}
               className={`w-full px-3 py-2 border border-gray-300 rounded-lg ${
@@ -44,9 +44,9 @@ const ProfileForm = ({ adminData, onUpdate }) => {
             </label>
             <input
               type="email"
-              value={formData?.adminEmail}
+              value={formData?.hospitalEmail}
               onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
+                setFormData({ ...formData, hospitalEmail: e.target.value })
               }
               disabled={!isEditing}
               className={`w-full px-3 py-2 border border-gray-300 rounded-lg ${
@@ -60,13 +60,13 @@ const ProfileForm = ({ adminData, onUpdate }) => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Hospital Name
+             Ph no:
           </label>
           <input
-            type="text"
-            value={formData?.hospitalId.hospitalName}
+            type="tel"
+            value={formData?.hospitalPhno}
             onChange={(e) =>
-              setFormData({ ...formData, hospitalName: e.target.value })
+              setFormData({ ...formData, hospitalPhno: e.target.value })
             }
             disabled={!isEditing}
             className={`w-full px-3 py-2 border border-gray-300 rounded-lg ${
@@ -80,13 +80,13 @@ const ProfileForm = ({ adminData, onUpdate }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Phone
+              Hospital Type
             </label>
             <input
-              type="tel"
-              value={formData.hospitalId.hospitalPhno}
+              type="text"
+              value={formData?.hospitalType}
               onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
+                setFormData({ ...formData, hospitalType: e.target.value })
               }
               disabled={!isEditing}
               className={`w-full px-3 py-2 border border-gray-300 rounded-lg ${
@@ -103,10 +103,10 @@ const ProfileForm = ({ adminData, onUpdate }) => {
             </label>
             <input
               type="text"
-              value={formData?.hospitalId.hospitalAddress
+              value={formData?.hospitalAddress
 }
               onChange={(e) =>
-                setFormData({ ...formData, address: e.target.value })
+                setFormData({ ...formData, hospitalAddress: e.target.value })
               }
               disabled={!isEditing}
               className={`w-full px-3 py-2 border border-gray-300 rounded-lg ${
@@ -129,7 +129,7 @@ const ProfileForm = ({ adminData, onUpdate }) => {
             >
               Cancel
             </button>
-            <button
+            <button 
               type="submit"
               className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700"
             >

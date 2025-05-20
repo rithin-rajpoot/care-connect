@@ -60,7 +60,7 @@ export const loginHospitalThunk = createAsyncThunk('admin/login',
 
         } catch (error) {
             const errorOutput = error?.response?.data?.errMessage;
-            console.log("error in loginPatientThunk:",errorOutput)
+            console.log("error in loginHospitalThunk:",errorOutput)
             toast.error(errorOutput);
             return rejectWithValue(errorOutput)
         }
@@ -75,6 +75,34 @@ export const getAdminProfileThunk = createAsyncThunk('admin/getAdminProfile',
 
         } catch (error) {
             const errorOutput = error?.response?.data?.errMessage;
+            return rejectWithValue(errorOutput)
+        }
+    }
+);
+
+export const updateHospitalProfileThunk = createAsyncThunk('admin/updateHospital',
+    async ({
+             hospitalName,
+             hospitalEmail,
+             hospitalPhno,
+             hospitalType,
+             hospitalAddress,
+        }, { rejectWithValue }) => {
+        try {
+            const updatedData = {
+                  hospitalName,
+                  hospitalEmail,
+                  hospitalPhno,
+                  hospitalType,
+                  hospitalAddress,
+            }
+            console.log("Inside Thunk: ",updatedData)
+            const response = await axiosInstance.post('/admin/update-hospital',updatedData);
+            return response.data;
+
+        } catch (error) {
+            const errorOutput = error?.response?.data?.errMessage;
+            console.log(errorOutput)
             return rejectWithValue(errorOutput)
         }
     }
