@@ -165,7 +165,7 @@ export const adminLogin = asyncHandler(async (req, res, next) => {
             message: "Login successful",
             responseData: {
                 adminDetails: adminResponse,
-                hospitalHospital: admin.hospitalId,
+                hospitalDetails: admin.hospitalId,
                 token
             }
         });
