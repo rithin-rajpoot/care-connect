@@ -12,7 +12,6 @@ const AdminDashBoard = () => {
   const dispatch = useDispatch();
 
   const { adminDetails } = useSelector((state) => state.hospitalReducer);
-  console.log(adminDetails)
 
   useEffect( () => {
      dispatch(getAdminProfileThunk());

@@ -5,57 +5,9 @@ import { errorHandler } from "../utils/errorHandler.util.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import  cloudinary  from "../lib/cloudinary.js";
+import { validateHospitalDetails } from "./validationMethods/validateHospitalDetails.js";
+import { validateAdminDetails } from "./validationMethods/validateAdminDetails.js";
 
-// Validation schemas
-const validateHospitalDetails = (hospitalDetails) => {
-    const { hospitalName, registrationId, hospitalType, hospitalEmail, hospitalPhno,hospitalAddress } = hospitalDetails;
-    
-    const errors = [];
-    
-    if (!hospitalName?.trim()) errors.push("Hospital name is required");
-    if (!registrationId?.trim()) errors.push("Registration ID is required");
-    if (!hospitalType?.trim()) errors.push("Hospital type is required");
-    if (!hospitalEmail?.trim()) errors.push("Hospital email is required");
-    if (!hospitalPhno?.trim()) errors.push("Hospital phone number is required");
-    if (!hospitalAddress?.trim()) errors.push("Hospital address is required");
-    
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (hospitalEmail && !emailRegex.test(hospitalEmail)) {
-        errors.push("Invalid hospital email format");
-    }
-    
-    // Phone validation (basic)
-    const phoneRegex = /^\+?[\d\s-()]+$/;
-    if (hospitalPhno && !phoneRegex.test(hospitalPhno)) {
-        errors.push("Invalid phone number format");
-    }
-    
-    return errors;
-};
-
-const validateAdminDetails = (adminDetails) => {
-    const { adminName, adminEmail, adminPassword } = adminDetails;
-    
-    const errors = [];
-    
-    if (!adminName?.trim()) errors.push("Admin name is required");
-    if (!adminEmail?.trim()) errors.push("Admin email is required");
-    if (!adminPassword?.trim()) errors.push("Admin password is required");
-    
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (adminEmail && !emailRegex.test(adminEmail)) {
-        errors.push("Invalid admin email format");
-    }
-    
-    // Password validation
-    if (adminPassword && adminPassword.length < 6) {
-        errors.push("Password must be at least 6 characters long");
-    }
-    
-    return errors;
-};
 
 export const registerHospitalAndAdmin = asyncHandler(async (req, res, next) => {
     const { hospitalDetails, adminDetails } = req.body;
@@ -212,7 +164,8 @@ export const adminLogin = asyncHandler(async (req, res, next) => {
             success: true,
             message: "Login successful",
             responseData: {
-                admin: adminResponse,
+                adminDetails: adminResponse,
+                hospitalHospital: admin.hospitalId,
                 token
             }
         });
@@ -230,7 +183,10 @@ export const getAdminProfile = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         success: true,
         message: "Profile retrieved successfully",
-        responseData: adminData
+        responseData: {
+            adminDetails: adminData,
+            hospitalDetails: adminData.hospitalId
+        }
     });
 });
 

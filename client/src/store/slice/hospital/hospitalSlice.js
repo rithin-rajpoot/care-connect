@@ -1,68 +1,70 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { registerHospitalThunk , loginHospitalThunk, getAdminProfileThunk} from './hospitalThunk'
+import { registerHospitalThunk, loginHospitalThunk, getAdminProfileThunk } from './hospitalThunk'
 
 const initialState = {
-    isAuthenticated: false,
-    hospitalDetails: null,
-    loading: false,
-    adminDetails:null,
+   isAdminAuthenticated: false,
+   hospitalDetails: null,
+   loading: false,
+   adminDetails: null,
 
 }
 
-const  hospitalSlice = createSlice({
-    name: 'hospital',
-    initialState,
-    reducers: {
-        
-    },
+const hospitalSlice = createSlice({
+   name: 'hospital',
+   initialState,
+   reducers: {
 
-    extraReducers: (builder) => {
-        // Login hospital
-        builder.addCase(loginHospitalThunk.pending, (state, action) => {
-            state.loading = true;
-        });
+   },
 
-        builder.addCase(loginHospitalThunk.fulfilled, (state, action) => { 
-             state.isAuthenticated = true;
-             state.adminDetails = action?.payload?.responseData?.admin
-            //  console.log(action?.payload?.responseData)
-        });
+   extraReducers: (builder) => {
+      // Login hospital
+      builder.addCase(loginHospitalThunk.pending, (state, action) => {
+         state.loading = true;
+      });
 
-        builder.addCase(loginHospitalThunk.rejected, (state, action) => { 
-            state.loading = false;
-        });
+      builder.addCase(loginHospitalThunk.fulfilled, (state, action) => {
+         state.isAdminAuthenticated = true;
+         state.adminDetails = action?.payload?.responseData?.adminDetails
+         state.hospitalDetails = action?.payload?.responseData?.hospitalDetails
+         state.loading = false;
+      });
+
+      builder.addCase(loginHospitalThunk.rejected, (state, action) => {
+         state.loading = false;
+      });
 
 
-        // REGISTRATION
-        builder.addCase(registerHospitalThunk.pending, (state, action) => { 
-           state.loading = true
-        });
+      // REGISTRATION
+      builder.addCase(registerHospitalThunk.pending, (state, action) => {
+         state.loading = true
+      });
 
-        builder.addCase(registerHospitalThunk.fulfilled, (state, action) => { 
-           state.loading = false;
-           state.hospitalDetails = action?.payload?.responseData?.HospitalDetails
-           state.adminDetails = action?.payload?.responseData?.AdminDetails
-        });
+      builder.addCase(registerHospitalThunk.fulfilled, (state, action) => {
+         state.isAdminAuthenticated = true;
+         state.loading = false;
+         state.hospitalDetails = action?.payload?.responseData?.HospitalDetails
+         state.adminDetails = action?.payload?.responseData?.AdminDetails
+      });
 
-        builder.addCase(registerHospitalThunk.rejected, (state, action) => { 
-           state.loading = false;
-        });
+      builder.addCase(registerHospitalThunk.rejected, (state, action) => {
+         state.loading = false;
+      });
 
-        // Get Admin Profile
-        builder.addCase(getAdminProfileThunk.pending, (state, action) => { 
-           state.loading = true
-        });
+      // Get Admin Profile
+      builder.addCase(getAdminProfileThunk.pending, (state, action) => {
+         state.loading = true
+      });
 
-        builder.addCase(getAdminProfileThunk.fulfilled, (state, action) => { 
-           state.loading = false;
-        //    console.log(action?.payload?.responseData)
-           state.adminDetails = action?.payload?.responseData
-        });
+      builder.addCase(getAdminProfileThunk.fulfilled, (state, action) => {
+         state.loading = false;
+         state.adminDetails = action?.payload?.responseData?.adminDetails
+         state.hospitalDetails = action?.payload?.responseData?.hospitalId
+      });
 
-        builder.addCase(getAdminProfileThunk.rejected, (state, action) => { 
-           state.loading = false;
-        });
-    }
+      builder.addCase(getAdminProfileThunk.rejected, (state, action) => {
+         state.loading = false;
+      });
+   }
 })
 
 

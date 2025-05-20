@@ -34,15 +34,12 @@ export const registerHospitalThunk = createAsyncThunk('admin/register',
                                 adminPassword,
                             }
                     }
-            console.log("inside Thunk:",hospitalData);
             const response = await axiosInstance.post('/admin/register', hospitalData);
-            console.log("Registration Success")
             toast.success("Admin registered successful")
              return response?.data;
 
         } catch (error) {
             const errorOutput = error?.response?.data?.errMessage;
-            console.log("error in registerPatientThunk:",errorOutput)
             toast.error(errorOutput);
             return rejectWithValue(errorOutput)
         }
