@@ -75,6 +75,7 @@ export const getAdminProfileThunk = createAsyncThunk('admin/getAdminProfile',
 
         } catch (error) {
             const errorOutput = error?.response?.data?.errMessage;
+            toast.error(errorOutput);
             return rejectWithValue(errorOutput)
         }
     }
@@ -102,7 +103,22 @@ export const updateHospitalProfileThunk = createAsyncThunk('admin/updateHospital
 
         } catch (error) {
             const errorOutput = error?.response?.data?.errMessage;
-            console.log(errorOutput)
+            toast.error(errorOutput);
+            return rejectWithValue(errorOutput)
+        }
+    }
+);
+
+export const logoutAdminThunk = createAsyncThunk('admin/logout',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.post('/admin/logout');
+            toast.success("Logged Out Successfully!!");
+            return response.data;
+
+        } catch (error) {
+            const errorOutput = error?.response?.data?.errMessage;
+            toast.error(errorOutput);
             return rejectWithValue(errorOutput)
         }
     }
