@@ -8,21 +8,21 @@ const router = express.Router();
 
 // Admin Specific Routes
 router.post('/register', isAuthenticated, registerDoctor);
-router.get('/all/:hospitalId', isAuthenticated, getAllDoctors);
-router.get('/stats', isAuthenticated, getDoctorStats);
-router.get('/:doctorId', isAuthenticated, getDoctorById);
-router.put('/:doctorId', isAuthenticated, updateDoctor);
-router.delete('/:doctorId', isAuthenticated, deleteDoctor);
+router.get('/all-doctors', isAuthenticated, getAllDoctors);
+// router.get('/stats', isAuthenticated, getDoctorStats);
+// router.get('/:doctorId', isAuthenticated, getDoctorById);
+// router.put('/:doctorId', isAuthenticated, updateDoctor);
+// router.delete('/:doctorId', isAuthenticated, deleteDoctor);
 
-// Doctor Login
-router.post('/login', doctorLogin);
-// Doctor Profile Management
-router.get('/profile/me', isAuthenticated, getDoctorProfile);
-router.put('/profile/me', isAuthenticated, updateDoctorProfile);
-router.put('/profile/change-password', isAuthenticated, changePassword);
-router.post('/profile/logout', isAuthenticated, userLogout);
+// // Doctor Login
+// router.post('/login', doctorLogin);
+// // Doctor Profile Management
+// router.get('/profile/me', isAuthenticated, getDoctorProfile);
+// router.put('/profile/me', isAuthenticated, updateDoctorProfile);
+// router.put('/profile/change-password', isAuthenticated, changePassword);
+// router.post('/profile/logout', isAuthenticated, userLogout);
 
-// patient use 
+// // patient use 
 router.get('/search/specialization', getDoctorsBySpecialization);
 
 export default router;

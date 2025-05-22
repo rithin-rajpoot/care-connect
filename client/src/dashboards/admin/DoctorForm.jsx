@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Eye, EyeOff, ArrowLeft, User, Mail, Phone, Clock, DollarSign, Calendar } from "lucide-react";
+import { Eye, EyeOff, ArrowLeft, User, Mail, Phone, Clock, DollarSign, Calendar, CloudCog } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer.jsx";
-import {registerDoctorThunk} from '../../store/slice/hospital/doctor/doctorThunk.js'
+import {registerDoctorThunk} from '../../store/slice/doctor/doctorThunk.js'
 
 import { useDispatch,useSelector } from "react-redux";
 
@@ -32,6 +32,8 @@ const opDaysOptions = [
 ];
 
 const DoctorForm = () => {
+  
+  const {hospitalDetails} = useSelector(state => state.hospitalReducer);
   const [formData, setFormData] = useState({
     fullName: "",
     specialization: "",
@@ -43,9 +45,8 @@ const DoctorForm = () => {
     email: "",
     phone: "",
     password: "",
+    hospitalId: hospitalDetails?._id
   });
-
-  const {hospitalDetails} = useSelector(state => state.hospitalReducer);
   const dispatch = useDispatch()
   
   const [showPassword, setShowPassword] = useState(false);
@@ -156,9 +157,8 @@ const DoctorForm = () => {
 
     try {
       setIsSubmitting(true);
-      console.log("HospitalDetails:",hospitalDetails)
-      formData.hospitalId = hospitalDetails?._id;
       const response = await dispatch(registerDoctorThunk(formData));
+      console.log(response)
       if(response?.payload?.success)
       {
          navigate("/admin-dashboard");
