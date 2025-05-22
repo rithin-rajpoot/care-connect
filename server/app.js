@@ -16,9 +16,6 @@ app.use(cors({
 app.use(cookieParser()) // for parsing cookie in middleware's
 app.use(express.json({ limit: '100mb' }));
 
-app.get('/', (req, res) => {
-    res.send("hey")
-})
 
 // routes 
 
@@ -27,6 +24,9 @@ app.use('/careconnect/api/patient', patientRouter);
 
 import adminRouter from './routes/admin.router.js';
 app.use('/careconnect/api/admin', adminRouter);
+
+import doctorRouter from './routes/doctor.router.js';
+app.use('/careconnect/api/doctor', doctorRouter);
 
 // error.middleware
 import { errorMiddleware } from './middlewares/error.middleware.js';
