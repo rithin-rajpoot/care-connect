@@ -23,21 +23,21 @@ const doctorSchema = new mongoose.Schema({
   consultationFee: { type: Number, required: true },
   opValidityDays: { type: Number, default: 30 },
 
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now } 
 });
 
-// Index for better query performance
-doctorSchema.index({ email: 1 });
-doctorSchema.index({ phone: 1 });
-doctorSchema.index({ hospitalId: 1 });
-doctorSchema.index({ specialization: 1 });
+// // Index for better query performance
+// doctorSchema.index({ email: 1 });
+// doctorSchema.index({ phone: 1 });
+// doctorSchema.index({ hospitalId: 1 });
+// doctorSchema.index({ specialization: 1 });
 
 // Virtual for full profile without password
-doctorSchema.methods.toJSON = function() {
-  const doctor = this.toObject();
-  delete doctor.password;
-  return doctor;
-};
+// doctorSchema.methods.toJSON = function() {
+//   const doctor = this.toObject();
+//   delete doctor.password;
+//   return doctor;
+// };
 
 const Doctor = mongoose.model('Doctor', doctorSchema);
 export default Doctor;

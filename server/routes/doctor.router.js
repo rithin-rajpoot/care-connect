@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Admin Specific Routes
 router.post('/register', isAuthenticated, registerDoctor);
-router.get('/all', isAuthenticated, getAllDoctors);
+router.get('/all/:hospitalId', isAuthenticated, getAllDoctors);
 router.get('/stats', isAuthenticated, getDoctorStats);
 router.get('/:doctorId', isAuthenticated, getDoctorById);
 router.put('/:doctorId', isAuthenticated, updateDoctor);

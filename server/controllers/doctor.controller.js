@@ -16,110 +16,132 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
         phone,
         password
     } = req.body;
+     
+
     
     // Validate required fields
     if (!fullName || !specialization || !hospitalId || !email || !phone || !password) {
         return next(new errorHandler("Required fields cannot be empty", 400));
     }
 
-    // Validate input formats
-    if (fullName.trim().length < 2) {
-        return next(new errorHandler("Full name must be at least 2 characters", 400));
-    }
+    // // Validate input formats
+    // if (fullName.trim().length < 2) {
+    //     return next(new errorHandler("Full name must be at least 2 characters", 400));
+    // }
 
-    if (specialization.trim().length < 2) {
-        return next(new errorHandler("Specialization must be at least 2 characters", 400));
-    }
+    // if (specialization.trim().length < 2) {
+    //     return next(new errorHandler("Specialization must be at least 2 characters", 400));
+    // }
 
-    // Validate email format
-    if (!/\S+@\S+\.\S+/.test(email)) {
-        return next(new errorHandler("Please enter a valid email address", 400));
-    }
+    // // Validate email format
+    // if (!/\S+@\S+\.\S+/.test(email)) {
+    //     return next(new errorHandler("Please enter a valid email address", 400));
+    // }
 
-    // Validate password
-    if (password.length < 6) {
-        return next(new errorHandler("Password must be at least 6 characters", 400));
-    }
+    // // Validate password
+    // if (password.length < 6) {
+    //     return next(new errorHandler("Password must be at least 6 characters", 400));
+    // }
 
-    // Validate phone format
-    const phoneRegex = /^[+]?[0-9]{10,15}$/;
-    const cleanPhone = phone.replace(/\s/g, "");
-    if (!phoneRegex.test(cleanPhone)) {
-        return next(new errorHandler("Please enter a valid phone number (10-15 digits)", 400));
-    }
+    // // Validate phone format
+    // const phoneRegex = /^[+]?[0-9]{10,15}$/;
+    // const cleanPhone = phone.replace(/\s/g, "");
+    // if (!phoneRegex.test(cleanPhone)) {
+    //     return next(new errorHandler("Please enter a valid phone number (10-15 digits)", 400));
+    // }
 
-    // Check if doctor already exists with email or phone
-    const existingDoctor = await Doctor.findOne({ 
-        $or: [{ email }, { phone: cleanPhone }] 
-    });
+    // // Check if doctor already exists with email or phone
+    // const existingDoctor = await Doctor.findOne({ 
+    //     $or: [{ email }, { phone: cleanPhone }] 
+    // });
     
-    if (existingDoctor) {
-        let conflict = "email";
-        if (existingDoctor.phone === cleanPhone) conflict = "phone number";
-        return next(new errorHandler(`A doctor already exists with this ${conflict}`, 400));
-    }
+    // if (existingDoctor) {
+    //     let conflict = "email";
+    //     if (existingDoctor.phone === cleanPhone) conflict = "phone number";
+    //     return next(new errorHandler(`A doctor already exists with this ${conflict}`, 400));
+    // }
 
-    // Validate operating days
-    const validDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    if (opDays && opDays.length > 0) {
-        const invalidDays = opDays.filter(day => !validDays.includes(day));
-        if (invalidDays.length > 0) {
-            return next(new errorHandler("Invalid operating days provided", 400));
-        }
-    }
+    // // Validate operating days
+    // const validDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    // if (opDays && opDays.length > 0) {
+    //     const invalidDays = opDays.filter(day => !validDays.includes(day));
+    //     if (invalidDays.length > 0) {
+    //         return next(new errorHandler("Invalid operating days provided", 400));
+    //     }
+    // }
 
-    // Validate operating hours
-    if (opHours) {
-        const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-        if (!timeRegex.test(opHours.start) || !timeRegex.test(opHours.end)) {
-            return next(new errorHandler("Operating hours must be in HH:MM format", 400));
-        }
+    // // Validate operating hours
+    // if (opHours) {
+    //     const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    //     if (!timeRegex.test(opHours.start) || !timeRegex.test(opHours.end)) {
+    //         return next(new errorHandler("Operating hours must be in HH:MM format", 400));
+    //     }
         
-        const startTime = new Date(`1970-01-01T${opHours.start}:00`);
-        const endTime = new Date(`1970-01-01T${opHours.end}:00`);
-        if (startTime >= endTime) {
-            return next(new errorHandler("End time must be after start time", 400));
-        }
-    }
+    //     const startTime = new Date(`1970-01-01T${opHours.start}:00`);
+    //     const endTime = new Date(`1970-01-01T${opHours.end}:00`);
+    //     if (startTime >= endTime) {
+    //         return next(new errorHandler("End time must be after start time", 400));
+    //     }
+    // }
 
-    // Validate consultation time and fee
-    if (avgConsultationTime && (avgConsultationTime < 5 || avgConsultationTime > 180)) {
-        return next(new errorHandler("Average consultation time must be between 5 and 180 minutes", 400));
-    }
+    // // Validate consultation time and fee
+    // if (avgConsultationTime && (avgConsultationTime < 5 || avgConsultationTime > 180)) {
+    //     return next(new errorHandler("Average consultation time must be between 5 and 180 minutes", 400));
+    // }
 
-    if (consultationFee && consultationFee < 0) {
-        return next(new errorHandler("Consultation fee cannot be negative", 400));
-    }
+    // if (consultationFee && consultationFee < 0) {
+    //     return next(new errorHandler("Consultation fee cannot be negative", 400));
+    // }
 
-    if (opValidityDays && (opValidityDays < 1 || opValidityDays > 365)) {
-        return next(new errorHandler("OP validity days must be between 1 and 365", 400));
-    }
+    // if (opValidityDays && (opValidityDays < 1 || opValidityDays > 365)) {
+    //     return next(new errorHandler("OP validity days must be between 1 and 365", 400));
+    // }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const doctorData = {
-        fullName: fullName.trim(),
-        specialization: specialization.trim(),
+    let doctorData = {
+        fullName,
+        specialization, 
         hospitalId,
-        opDays: opDays || [],
-        opHours: opHours || { start: "09:00", end: "17:00" },
-        avgConsultationTime: avgConsultationTime || 30,
-        consultationFee: consultationFee || 500,
-        opValidityDays: opValidityDays || 30,
-        email: email.toLowerCase().trim(),
-        phone: cleanPhone,
-        password: hashedPassword,
-    };
+        opDays, 
+        opHours, 
+        avgConsultationTime, 
+        consultationFee, 
+        opValidityDays,
+        email,
+        phone,
+        password,
+    }
+    console.log("doctorData:",doctorData);
+    // Hash password
+    const hashedPassword = await bcrypt.hash(doctorData.password, 10);
+
+    doctorData.password = hashedPassword;
+
+    // const doctorData = {
+    //     fullName: fullName.trim(),
+    //     specialization: specialization.trim(),
+    //     hospitalId,
+    //     opDays: opDays || [],
+    //     opHours: opHours || { start: "09:00", end: "17:00" },
+    //     avgConsultationTime: avgConsultationTime || 30,
+    //     consultationFee: consultationFee || 500,
+    //     opValidityDays: opValidityDays || 30,
+    //     email: email.toLowerCase().trim(),
+    //     phone: cleanPhone,
+    //     password: hashedPassword,
+    // };
+
+    // console.log("doctorData:",doctorData)
 
     const newDoctor = new Doctor(doctorData);
+    console.log("new-doct:",newDoctor)
     await newDoctor.save();
-
+    
+    
     res.status(201).json({
         success: true,
         message: "Doctor registered successfully",
         responseData: {
-            doctor: {
+            doctorDetails: {
                 _id: newDoctor._id,
                 fullName: newDoctor.fullName,
                 specialization: newDoctor.specialization,
@@ -139,7 +161,7 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
 });
 
 export const getAllDoctors = asyncHandler(async (req, res, next) => {
-    const { page = 1, limit = 10, hospitalId, specialization, search } = req.query;
+    const { page = 1, limit = 10, hospitalId, specialization, search } = req.params;
     
     const filter = {};
     
@@ -161,7 +183,7 @@ export const getAllDoctors = asyncHandler(async (req, res, next) => {
     const skip = (page - 1) * limit;
     
     const doctors = await Doctor.find(filter)
-        .populate('hospitalId', 'name address phone email')
+        .populate('hospitalId', 'hospitalName hospitalAddress hospitalPhno hospitalEmail')
         .sort({ fullName: 1 })
         .skip(skip)
         .limit(parseInt(limit));

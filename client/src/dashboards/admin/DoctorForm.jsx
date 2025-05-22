@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Eye, EyeOff, ArrowLeft, User, Mail, Phone, Clock, DollarSign, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer.jsx";
+import {registerDoctorThunk} from '../../store/slice/hospital/doctor/doctorThunk.js'
+
+import { useDispatch,useSelector } from "react-redux";
 
 const specializations = [
   "Cardiology",
@@ -41,6 +44,9 @@ const DoctorForm = () => {
     phone: "",
     password: "",
   });
+
+  const {hospitalDetails} = useSelector(state => state.hospitalReducer);
+  const dispatch = useDispatch()
   
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -150,15 +156,15 @@ const DoctorForm = () => {
 
     try {
       setIsSubmitting(true);
-      // Mock API call - replace with actual API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      
-      // Here you would make the actual API call to add the doctor
-      // const response = await addDoctorAPI(formData);
-      
-      alert("Doctor added successfully!");
-      navigate("/admin-dashboard");
+      console.log("HospitalDetails:",hospitalDetails)
+      formData.hospitalId = hospitalDetails?._id;
+      const response = await dispatch(registerDoctorThunk(formData));
+      if(response?.payload?.success)
+      {
+         navigate("/admin-dashboard");
+      }
     } catch (error) {
+      console.log(error)
       setErrors({ general: "Failed to add doctor. Please try again." });
     } finally {
       setIsSubmitting(false);
