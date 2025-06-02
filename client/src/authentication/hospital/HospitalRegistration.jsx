@@ -390,11 +390,11 @@ const HospitalRegistration = () => {
           <div className="flex justify-center md:justify-start items-center gap-2 flex-wrap">
            
           <div className="relative">
-            <img
+            {<img
               src={image || "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"}
               alt="Profile"
-              className="object-cover w-16 h-16 rounded-full border-4 border-gray-700"
-            />
+              className="object-cover w-12 h-12 rounded-full border-4 border-gray-700"
+            />}
                 <input ref={imageInputRef}
                   type="file" 
                   accept="image/*" 
@@ -403,7 +403,7 @@ const HospitalRegistration = () => {
                   // disabled={isUpdatingProfile} // <- disable input when updating profile
                 />
           </div>
-               <button className="flex gap-2 items-center bg-blue-500 p-2 text-white rounded-md cursor-pointer" onClick={handleImageButton}> Upload Logo <Camera className="text-white size-5" /></button>
+               <button className="flex gap-2 items-center bg-blue-500 p-2 text-white rounded-md cursor-pointer" onClick={handleImageButton}> Upload Logo <Camera className="text-white size-4" /></button>
         </div>
                
               <div className="mb-8">
