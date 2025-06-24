@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, ArrowLeft, Phone, Mail, User, Calendar, MapPin } from 'lucide-react';
-import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerPatientThunk } from '../../store/slice/patient/patientThunk';
+import Header from '../../components/Header';
 
 const PatientRegistration = () => {
   const [registrationMethod, setRegistrationMethod] = useState("email");
@@ -252,7 +252,7 @@ const PatientRegistration = () => {
 
   return (
     <>
-      <Navbar />
+      <Header />
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 py-8">
         <div className="w-full max-w-md">
           <Link to="/" className="flex items-center mb-6 text-gray-700 hover:text-gray-900 transition-colors">

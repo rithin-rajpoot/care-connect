@@ -461,7 +461,7 @@ const DoctorForm = () => {
               <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200 mt-8">
                 <button
                   type="button"
-                  onClick={() => navigate("/hospital-dashboard")}
+                  onClick={() => navigate("/admin-dashboard")}
                   className="px-6 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors cursor-pointer"
                   disabled={isSubmitting}
                 >

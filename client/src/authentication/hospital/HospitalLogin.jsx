@@ -4,9 +4,9 @@ import { ArrowLeft, Mail, KeyRound } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginHospitalThunk } from '../../store/slice/hospital/hospitalThunk';
-import Navbar from '../../components/Navbar.jsx';
 import Footer from '../../components/Footer.jsx';
 import {Loader} from 'lucide-react'
+import Header from '../../components/Header.jsx';
 
 const HospitalLogin = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const HospitalLogin = () => {
 
   return (
     <>
-      <Navbar />
+      <Header />
       <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-xl shadow-md">
           <Link to="/" className="flex items-center text-gray-500 hover:text-gray-700 mb-4">

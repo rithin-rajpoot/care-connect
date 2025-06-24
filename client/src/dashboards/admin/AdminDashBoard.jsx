@@ -12,7 +12,7 @@ import {
 import { getAllDoctorsThunk } from "../../store/slice/doctor/doctorThunk.js";
 
 const AdminDashBoard = () => {
-  const [activeTab, setActiveTab] = useState("add-doctor");
+  const [activeTab, setActiveTab] = useState("all-doctors");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -50,6 +50,13 @@ const AdminDashBoard = () => {
               </h1>
             </div>
             <div className="flex items-center space-x-4">
+               <button
+                onClick={() => navigate("/add-doctor")}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg mr-4 hover:bg-blue-700 flex items-center space-x-2 mx-auto cursor-pointer"
+              >
+                <UserPlus size={20} />
+                <span>Add Doctor</span>
+              </button>
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
                   {adminDetails?.adminName.charAt(0)}
@@ -112,30 +119,8 @@ const AdminDashBoard = () => {
           </nav>
         </div>
 
-        {/* Add Doctor Tab */}
-        {activeTab === "add-doctor"  && (
-          <div className="bg-white rounded-lg shadow p-6 min-h-[60vh] flex flex-col justify-center items-center">
-            <div className="text-center">
-              <UserPlus className="mx-auto h-12 w-12 text-blue-500 mb-4" />
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Add New Doctor
-              </h2>
-              <p className="text-gray-600 mb-8">
-                Add doctors to your hospital so they can start accepting
-                appointments
-              </p>
-              <button
-                onClick={() => navigate("/add-doctor")}
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-medium flex items-center space-x-2 mx-auto cursor-pointer"
-              >
-                <UserPlus size={20} />
-                <span>Add Doctor</span>
-              </button>
-            </div>
-          </div>
-        )}
 
-        {activeTab === "all-doctors" && doctors.length > 0 && (
+        {activeTab === 'all-doctors' && doctors.length > 0 && (
           <div className="min-h-[75vh] bg-white rounded-xl shadow-md overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
@@ -185,6 +170,30 @@ const AdminDashBoard = () => {
             </div>
           </div>
         )}
+
+        {/* Add Doctor Tab */}
+        {(activeTab === "add-doctor" || doctors.length === 0) && (
+          <div className="bg-white rounded-lg shadow p-6 min-h-[60vh] flex flex-col justify-center items-center">
+            <div className="text-center">
+              <UserPlus className="mx-auto h-12 w-12 text-blue-500 mb-4" />
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                Add New Doctor
+              </h2>
+              <p className="text-gray-600 mb-8">
+                Add doctors to your hospital so they can start accepting
+                appointments
+              </p>
+              <button
+                onClick={() => navigate("/add-doctor")}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-medium flex items-center space-x-2 mx-auto cursor-pointer"
+              >
+                <UserPlus size={20} />
+                <span>Add Doctor</span>
+              </button>
+            </div>
+          </div>
+        )}
+
 
         {/* Profile Tab */}
         {activeTab === "profile" && (

@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Building, Mail, Phone, MapPin, User, KeyRound, CheckCircle, Loader, Eye, EyeOff , Camera } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Footer from '../../components/Footer.jsx';
-import Navbar from '../../components/Navbar.jsx';
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import {registerHospitalThunk} from '../../store/slice/hospital/hospitalThunk.js'
+import Header from '../../components/Header.jsx';
 
 const hospitalTypes = [
   'General Hospital',
@@ -225,7 +225,7 @@ const HospitalRegistration = () => {
 
   return (
     <>
-    <Navbar/>
+    <Header/>
     <div className="min-h-[90vh] bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center py-6 px-2">
       <div className="w-fit min-w-[40vw] max-w-2xl bg-white rounded-xl shadow-lg p-6 sm:p-10">
         <Link to="/" className="flex items-center text-gray-500 hover:text-blue-400 mb-6 transition-colors">

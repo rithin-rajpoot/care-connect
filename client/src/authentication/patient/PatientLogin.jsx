@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Mail, Phone, KeyRound, Eye, EyeOff } from "lucide-react";
-import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { loginPatientThunk } from "../../store/slice/patient/patientThunk";
+import Header from "../../components/Header";
 
 const PatientLogin = () => {
   const { isAuthenticated } = useSelector((state) => state.patientReducer);
@@ -199,7 +199,7 @@ const PatientLogin = () => {
 
   return (
     <>
-      <Navbar />
+      <Header />
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
         <div className="w-full max-w-md">
           <Link

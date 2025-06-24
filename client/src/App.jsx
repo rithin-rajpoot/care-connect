@@ -6,9 +6,10 @@ import PatientLogin from './authentication/patient/PatientLogin';
 import PatientRegistration from './authentication/patient/PatientRegistration';
 import HospitalLogin from './authentication/hospital/HospitalLogin';
 import HospitalRegistration from './authentication/hospital/HospitalRegistration';
-import PatientDashBoard from './dashboards/PatientDashBoard';
+import PatientDashBoard from './dashboards/patient/PatientDashBoard';
 import AdminDashBoard from './dashboards/admin/AdminDashBoard';
 import DoctorForm from './dashboards/admin/DoctorForm';
+import Dashboard from './home/Dashboard';
 const App = () => {
   return (
     <>
@@ -16,7 +17,12 @@ const App = () => {
     <Routes>
         <Route
           path="/"
-          element={ <HomePage />
+          element={ <Dashboard/>
+          }
+        />
+        <Route
+          path="home"
+          element={ <HomePage/>
           }
         />
         <Route path="/patient-login" element={<PatientLogin />} />
