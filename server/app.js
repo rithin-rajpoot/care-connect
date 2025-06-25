@@ -22,6 +22,9 @@ app.use(express.json({ limit: '100mb' }));
 import patientRouter from './routes/patient.router.js';
 app.use('/careconnect/api/patient', patientRouter);
 
+import hospitalRouter from './routes/hospital.router.js';
+app.use('/careconnect/api/hospital', hospitalRouter);
+
 import adminRouter from './routes/admin.router.js';
 app.use('/careconnect/api/admin', adminRouter);
 

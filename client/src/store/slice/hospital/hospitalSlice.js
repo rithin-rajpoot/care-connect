@@ -12,7 +12,6 @@ const hospitalSlice = createSlice({
    name: 'hospital',
    initialState,
    reducers: {
-
    },
 
    extraReducers: (builder) => {
@@ -95,8 +94,6 @@ const hospitalSlice = createSlice({
       builder.addCase(logoutAdminThunk.rejected, (state) => {
          state.loading = false;
       });
-
-
    }
 })
 

@@ -46,7 +46,6 @@ export const registerHospitalThunk = createAsyncThunk('admin/register',
     }
 );
 
-
 export const loginHospitalThunk = createAsyncThunk('admin/login',
     async ( {adminEmail,adminPassword}, { rejectWithValue }) => {
         try {
