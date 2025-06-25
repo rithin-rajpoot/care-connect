@@ -15,16 +15,7 @@ const App = () => {
     <>
     <Toaster position="top-center" reverseOrder={false} />
     <Routes>
-        <Route
-          path="/"
-          element={ <Dashboard/>
-          }
-        />
-        <Route
-          path="home"
-          element={ <HomePage/>
-          }
-        />
+        <Route path="/" element={ <Dashboard/>}/>
         <Route path="/patient-login" element={<PatientLogin />} />
         <Route path="/patient-register" element={<PatientRegistration /> } />
         <Route path="/hospital-login" element={<HospitalLogin />} />
@@ -38,3 +29,9 @@ const App = () => {
 }
 
 export default App
+
+ {/* <Route
+          path="home"
+          element={ <HomePage/>
+          }
+        /> */}
