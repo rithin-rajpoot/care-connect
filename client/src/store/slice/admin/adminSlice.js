@@ -58,7 +58,6 @@ const adminSlice = createSlice({
       builder.addCase(getAdminProfileThunk.fulfilled, (state, action) => {
          state.loading = false;
          state.adminDetails = action?.payload?.responseData?.adminDetails
-         // state.hospitalDetails = action?.payload?.responseData?.hospitalDetails
       });
 
       builder.addCase(getAdminProfileThunk.rejected, (state, action) => {

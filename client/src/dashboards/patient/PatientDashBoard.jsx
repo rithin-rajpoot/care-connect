@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getPatientProfileThunk } from "../../store/slice/patient/patientThunk.js";
+import { getPatientProfileThunk, logoutPatientThunk } from "../../store/slice/patient/patientThunk.js";
 
 const PatientDashboard = () => {
   const [activeTab, setActiveTab] = useState("book-appointment");
@@ -96,7 +96,7 @@ const PatientDashboard = () => {
   ];
 
   const handleLogout = () => {
-    // Implement logout logic
+    dispatch(logoutPatientThunk());
     navigate("/patient-login");
   };
 
