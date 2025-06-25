@@ -53,8 +53,8 @@ export const getPatientProfileThunk = createAsyncThunk('patient/getProfile',
     async (_, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.get('/patient/get-profile');
+            console.log("getPatientProfileThunk response:", response.data);
             return response.data;
-
         } catch (error) {
             const errorOutput = error?.response?.data?.errMessage;
             return rejectWithValue(errorOutput)

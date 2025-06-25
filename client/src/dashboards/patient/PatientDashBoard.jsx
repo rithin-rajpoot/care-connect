@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { getPatientProfileThunk } from "../../store/slice/patient/patientThunk.js";
 
 const PatientDashboard = () => {
   const [activeTab, setActiveTab] = useState("book-appointment");
@@ -28,14 +29,8 @@ const PatientDashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Mock data - replace with actual Redux state
-  const patientDetails = {
-    name: "John Doe",
-    email: "john.doe@email.com",
-    phone: "+91 98765 43210",
-    age: 28,
-    bloodGroup: "B+"
-  };
+  
+  const { patientDetails } = useSelector((state) => state.patientReducer);
 
   const upcomingAppointments = [
     {
@@ -105,6 +100,11 @@ const PatientDashboard = () => {
     navigate("/patient-login");
   };
 
+  // GetPatient Profile
+  useEffect(()=>{
+       dispatch(getPatientProfileThunk());
+  },[]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       {/* Navigation Header */}
@@ -116,7 +116,7 @@ const PatientDashboard = () => {
                 <Heart className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">MediQueue</h1>
+                <h1 className="text-xl font-bold text-gray-900">Care Connect</h1>
                 <p className="text-xs text-blue-600">Patient Portal</p>
               </div>
             </div>
@@ -129,11 +129,11 @@ const PatientDashboard = () => {
               </button>
               <div className="flex items-center space-x-3">
                 <div className="w-9 h-9 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
-                  {patientDetails?.name?.charAt(0)}
+                  {patientDetails?.fullName?.charAt(0)}
                 </div>
                 <div className="hidden sm:block">
                   <span className="text-sm font-medium text-gray-900">
-                    {patientDetails?.name}
+                    {patientDetails?.fullName}
                   </span>
                   <p className="text-xs text-gray-500">Patient</p>
                 </div>
@@ -160,7 +160,7 @@ const PatientDashboard = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Upcoming</p>
-                <p className="text-2xl font-bold text-gray-900">{upcomingAppointments.length}</p>
+                <p className="text-2xl font-bold text-gray-900">{upcomingAppointments?.length}</p>
               </div>
             </div>
           </div>
@@ -171,7 +171,7 @@ const PatientDashboard = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Completed</p>
-                <p className="text-2xl font-bold text-gray-900">{recentAppointments.length}</p>
+                <p className="text-2xl font-bold text-gray-900">{recentAppointments?.length}</p>
               </div>
             </div>
           </div>
@@ -182,7 +182,7 @@ const PatientDashboard = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Nearby Hospitals</p>
-                <p className="text-2xl font-bold text-gray-900">{nearbyHospitals.length}</p>
+                <p className="text-2xl font-bold text-gray-900">{nearbyHospitals?.length}</p>
               </div>
             </div>
           </div>
@@ -280,7 +280,7 @@ const PatientDashboard = () => {
               </div>
               <div className="p-6">
                 <div className="grid gap-4">
-                  {nearbyHospitals.map((hospital) => (
+                  {nearbyHospitals?.map((hospital) => (
                     <div key={hospital.id} className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -332,9 +332,9 @@ const PatientDashboard = () => {
                 <p className="text-sm text-gray-600 mt-1">Your scheduled medical consultations</p>
               </div>
               <div className="p-6">
-                {upcomingAppointments.length > 0 ? (
+                {upcomingAppointments?.length > 0 ? (
                   <div className="space-y-4">
-                    {upcomingAppointments.map((appointment) => (
+                    {upcomingAppointments?.map((appointment) => (
                       <div key={appointment.id} className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-md transition-all">
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
@@ -406,7 +406,7 @@ const PatientDashboard = () => {
                 </h3>
               </div>
               <div className="p-6">
-                {recentAppointments.map((appointment) => (
+                {recentAppointments?.map((appointment) => (
                   <div key={appointment.id} className="border border-gray-200 rounded-lg p-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
@@ -443,11 +443,11 @@ const PatientDashboard = () => {
               <div className="max-w-2xl">
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                    {patientDetails.name.charAt(0)}
+                    {patientDetails?.fullName.charAt(0)}
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-900">{patientDetails.name}</h4>
-                    <p className="text-gray-600">Patient ID: #P12345</p>
+                    <h4 className="text-xl font-semibold text-gray-900">{patientDetails?.fullName}</h4>
+                    <p className="text-gray-600">Patient ID:{patientDetails?._id}</p>
                   </div>
                 </div>
                 
@@ -456,7 +456,7 @@ const PatientDashboard = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
                     <input 
                       type="text" 
-                      value={patientDetails.name}
+                      value={patientDetails?.fullName}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       readOnly
                     />
@@ -465,7 +465,7 @@ const PatientDashboard = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                     <input 
                       type="email" 
-                      value={patientDetails.email}
+                      value={patientDetails?.email}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       readOnly
                     />
@@ -474,25 +474,25 @@ const PatientDashboard = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
                     <input 
                       type="tel" 
-                      value={patientDetails.phone}
+                      value={patientDetails?.phone}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       readOnly
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">DOB</label>
                     <input 
                       type="number" 
-                      value={patientDetails.age}
+                      value={patientDetails?.DOB}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       readOnly
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Blood Group</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
                     <input 
                       type="text" 
-                      value={patientDetails.bloodGroup}
+                      value={patientDetails?.gender}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       readOnly
                     />

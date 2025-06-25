@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mail, KeyRound } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginHospitalThunk } from '../../store/slice/hospital/hospitalThunk';
+import { loginAdminThunk } from '../../store/slice/admin/adminThunk';
 import Footer from '../../components/Footer.jsx';
 import {Loader} from 'lucide-react'
 import Header from '../../components/Header.jsx';
+import { setHospitalDetails } from '../../store/slice/hospital/hospitalSlice.js';
 
 const HospitalLogin = () => {
   const navigate = useNavigate();
@@ -45,8 +46,9 @@ const HospitalLogin = () => {
     e.preventDefault();
     if (!validateForm()) return;
     setIsSubmitting(true);
-    const response = await dispatch(loginHospitalThunk(formData));
+    const response = await dispatch(loginAdminThunk(formData));
     if (response?.payload?.success) {
+      dispatch(setHospitalDetails(response?.payload?.responseData?.hospitalDetails)); // set hospital details after admin login
       navigate('/admin-dashboard'); 
     }
     setIsSubmitting(false);

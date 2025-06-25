@@ -3,7 +3,6 @@ import { useState } from "react";
 const ProfileForm = ({ hospitalData, onUpdate }) => {
   const [formData, setFormData] = useState(hospitalData);
   const [isEditing, setIsEditing] = useState(false);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdate(formData);
