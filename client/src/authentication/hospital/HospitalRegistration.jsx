@@ -4,9 +4,9 @@ import { ArrowLeft, Building, Mail, Phone, MapPin, User, KeyRound, CheckCircle, 
 import toast from 'react-hot-toast';
 import Footer from '../../components/Footer.jsx';
 import { useDispatch} from 'react-redux';
-import {registerHospitalThunk} from '../../store/slice/hospital/hospitalThunk.js'
+import {registerHospitalAndAdminThunk} from '../../store/slice/admin/adminThunk.js'
 import Header from '../../components/Header.jsx';
-
+import { setHospitalDetails } from '../../store/slice/hospital/hospitalSlice.js';
 const hospitalTypes = [
   'General Hospital',
   'Super Specialty',
@@ -192,10 +192,11 @@ const HospitalRegistration = () => {
     if (step === 3) {
       try {
         setIsSubmitting(true);
-        const response = await dispatch(registerHospitalThunk(formData));
+        const response = await dispatch(registerHospitalAndAdminThunk(formData));
         
         if (response?.payload?.success) {
           toast.success("Hospital registered successfully!");
+          dispatch(setHospitalDetails(response?.payload?.responseData?.hospitalDetails)); // set hospital details after registration
           navigate("/admin-dashboard"); // redirect
         } else {
           setErrors({

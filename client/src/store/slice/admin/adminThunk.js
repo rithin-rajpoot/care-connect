@@ -3,7 +3,7 @@ import { toast } from 'react-hot-toast'
 import { axiosInstance } from '../../../lib/axiosInstance.js'
 
 
-export const registerHospitalThunk = createAsyncThunk('admin/register',
+export const registerHospitalAndAdminThunk = createAsyncThunk('admin/register',
     async ( {
                 hospitalName,
                 registrationId,
@@ -47,7 +47,7 @@ export const registerHospitalThunk = createAsyncThunk('admin/register',
 );
 
 
-export const loginHospitalThunk = createAsyncThunk('admin/login',
+export const loginAdminThunk = createAsyncThunk('admin/login',
     async ( {adminEmail,adminPassword}, { rejectWithValue }) => {
         try {
            
@@ -81,24 +81,11 @@ export const getAdminProfileThunk = createAsyncThunk('admin/getAdminProfile',
     }
 );
 
-export const updateHospitalProfileThunk = createAsyncThunk('admin/updateHospital',
-    async ({
-             hospitalName,
-             hospitalEmail,
-             hospitalPhno,
-             hospitalType,
-             hospitalAddress,
-        }, { rejectWithValue }) => {
+export const logoutAdminThunk = createAsyncThunk('admin/logout',
+    async (_, { rejectWithValue }) => {
         try {
-            const updatedData = {
-                  hospitalName,
-                  hospitalEmail,
-                  hospitalPhno,
-                  hospitalType,
-                  hospitalAddress,
-            }
-            // console.log("Inside Thunk: ",updatedData)
-            const response = await axiosInstance.post('/hospital/update-hospital',updatedData);
+            const response = await axiosInstance.post('/admin/logout');
+            toast.success("Logged Out Successfully!!");
             return response.data;
 
         } catch (error) {
@@ -108,4 +95,8 @@ export const updateHospitalProfileThunk = createAsyncThunk('admin/updateHospital
         }
     }
 );
+
+
+
+
 

@@ -7,22 +7,28 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAdminProfileThunk,
   logoutAdminThunk,
-  updateHospitalProfileThunk,
-} from "../../store/slice/hospital/hospitalThunk.js";
+} from "../../store/slice/admin/adminThunk.js";
+import { updateHospitalProfileThunk } from "../../store/slice/hospital/hospitalThunk.js";
 import { getAllDoctorsThunk } from "../../store/slice/doctor/doctorThunk.js";
+import { setHospitalDetails } from "../../store/slice/hospital/hospitalSlice.js";
 
 const AdminDashBoard = () => {
   const [activeTab, setActiveTab] = useState("all-doctors");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { adminDetails, hospitalDetails } = useSelector(
-    (state) => state.hospitalReducer
-  );
+  const { adminDetails } = useSelector( (state) => state.adminReducer);
+  const { hospitalDetails } = useSelector( (state) => state.hospitalReducer);
   const { doctors } = useSelector((state) => state.doctorReducer);
 
   useEffect(() => {
-    dispatch(getAdminProfileThunk());
+    const getAdminAndHospitalData = async () =>{
+      const response = await dispatch(getAdminProfileThunk());
+       if (response?.payload?.success) {
+            dispatch(setHospitalDetails(response?.payload?.responseData?.hospitalDetails));
+       }
+    }
+    getAdminAndHospitalData();
     dispatch(getAllDoctorsThunk());
   }, []);
 

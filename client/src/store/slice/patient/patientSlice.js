@@ -3,7 +3,7 @@ import { getPatientProfileThunk, loginPatientThunk, logoutPatientThunk, register
 
 const initialState = {
     isAuthenticated: false,
-    patientProfile: null,
+    patientDetails: null,
     loading: false,
     opBookings:[]
 }
@@ -24,7 +24,7 @@ const patientSlice = createSlice({
         });
 
         builder.addCase(loginPatientThunk.fulfilled, (state, action) => { 
-            state.patientProfile = action?.payload?.responseData?.patient 
+            state.patientDetails = action?.payload?.responseData?.patient 
             // console.log("Logged In:",state.patientProfile)
             state.isAuthenticated = true;
             state.loading = false;
@@ -42,7 +42,7 @@ const patientSlice = createSlice({
         });
 
         builder.addCase(registerPatientThunk.fulfilled, (state, action) => {
-            state.patientProfile = action.payload?.responseData?.patient;
+            state.patientDetails = action.payload?.responseData?.patient;
             state.isAuthenticated = true;
             state.loading = false;
         });
@@ -59,7 +59,7 @@ const patientSlice = createSlice({
 
         builder.addCase(getPatientProfileThunk.fulfilled, (state, action) => {
             state.isAuthenticated = true;
-            state.patientProfile = action.payload?.responseData;
+            state.patientDetails = action.payload?.responseData;
             state.loading = false;
         });
 
@@ -73,7 +73,7 @@ const patientSlice = createSlice({
         });
 
         builder.addCase(logoutPatientThunk.fulfilled, (state, action) => {
-            state.patientProfile = null;
+            state.patientDetails = null;
             state.isAuthenticated = false;
             state.loading = false;
         });
