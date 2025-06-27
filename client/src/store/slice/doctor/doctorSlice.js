@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getAllDoctorsThunk, registerDoctorThunk } from './doctorThunk';
+import { getAllDoctorsThunk, getDoctorsByHospitalThunk, registerDoctorThunk } from './doctorThunk';
 
 const initialState = {
    doctors:[],
@@ -30,11 +30,26 @@ const doctorSlice = createSlice({
       });
 
 
-      builder.addCase(getAllDoctorsThunk.pending, (state, action) => {
+      // builder.addCase(getAllDoctorsThunk.pending, (state, action) => {
+      //    state.loading = true;
+      // });
+
+      // builder.addCase(getAllDoctorsThunk.fulfilled, (state, action) => {
+      //      const doctorData = action?.payload?.responseData?.doctors;
+      //      state.doctors = doctorData;
+      //      state.loading = false;
+      // });
+
+      //  builder.addCase(getAllDoctorsThunk.rejected, (state) => {
+      //    state.loading = false;
+      // });
+
+      // For getting doctors by hospital
+      builder.addCase(getDoctorsByHospitalThunk.pending, (state, action) => {
          state.loading = true;
       });
 
-      builder.addCase(getAllDoctorsThunk.fulfilled, (state, action) => {
+      builder.addCase(getDoctorsByHospitalThunk.fulfilled, (state, action) => {
            const doctorData = action?.payload?.responseData?.doctors;
            state.doctors = doctorData;
            state.loading = false;

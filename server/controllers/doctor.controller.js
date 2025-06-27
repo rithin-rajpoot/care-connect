@@ -306,34 +306,7 @@ export const deleteDoctor = asyncHandler(async (req, res, next) => {
 
 
 // for patient use 
-export const getDoctorsBySpecialization = asyncHandler(async (req, res, next) => {
-    const { specialization, hospitalId } = req.query;
 
-    if (!specialization) {
-        return next(new errorHandler("Specialization is required", 400));
-    }
-
-    const filter = {
-        specialization: { $regex: specialization, $options: 'i' }
-    };
-
-    if (hospitalId) {
-        filter.hospitalId = hospitalId;
-    }
-
-    const doctors = await Doctor.find(filter)
-        .populate('hospitalId', 'name address phone email')
-        .sort({ fullName: 1 });
-
-    res.status(200).json({
-        success: true,
-        message: "Doctors retrieved successfully",
-        responseData: {
-            doctors,
-            count: doctors.length
-        }
-    });
-});
 
 export const getDoctorStats = asyncHandler(async (req, res, next) => {
     const { hospitalId } = req.query;
@@ -376,6 +349,56 @@ export const getDoctorStats = asyncHandler(async (req, res, next) => {
                 specializations: []
             },
             specializationBreakdown: specializationStats
+        }
+    });
+});
+
+export const getDoctorsBySpecialization = asyncHandler(async (req, res, next) => {
+    const { specialization, hospitalId } = req.query;
+
+    if (!specialization) {
+        return next(new errorHandler("Specialization is required", 400));
+    }
+
+    const filter = {
+        specialization: { $regex: specialization, $options: 'i' }
+    };
+
+    if (hospitalId) {
+        filter.hospitalId = hospitalId;
+    }
+
+    const doctors = await Doctor.find(filter)
+        .populate('hospitalId', 'name address phone email')
+        .sort({ fullName: 1 });
+
+    res.status(200).json({
+        success: true,
+        message: "Doctors retrieved successfully",
+        responseData: {
+            doctors,
+            count: doctors.length
+        }
+    });
+});
+
+export const getDoctorsByHospital = asyncHandler(async (req, res, next) => {
+    const { hospitalId } = req.params;
+
+    if (!hospitalId) {
+        return next(new errorHandler("Hospital ID is required", 400));
+    }
+
+    const doctors = await Doctor.find({ hospitalId })
+        .populate('hospitalId', 'name address phone email')
+        .sort({ fullName: 1 });
+
+    res.status(200).json({
+        success: true,
+        message: "Doctors retrieved successfully",
+        responseData: {
+            doctors,
+            count: doctors.length
         }
     });
 });

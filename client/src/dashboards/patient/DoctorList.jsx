@@ -9,6 +9,8 @@ import {
   IndianRupee,
   X,
 } from "lucide-react";
+import { useSelector } from "react-redux";
+import DoctorCard from "./DoctorCard";
 
 
 
@@ -46,93 +48,7 @@ const DoctorsList = () => {
     return value;
   };
 
-  const doctors = [
-    {
-      "_id": { "$oid": "682f10e40f6d02675c851260" },
-      "fullName": "Dr. Rithin Rajpoot",
-      "specialization": "Cardiology",
-      "role": "doctor",
-      "hospitalId": { "$oid": "682b636afb292ca0153f2318" },
-      "email": "rjpoot@gmail.com",
-      "phone": "7013047820",
-      "password": "$2b$10$6zM8ZTF5iTsGkP12f9FUX.jI6rE/HaIL1t5avmkUuutzuU3kF1PUW",
-      "opDays": ["Monday", "Tuesday"],
-      "opHours": { "start": "09:00", "end": "17:00" },
-      "avgConsultationTime": { "$numberInt": "30" },
-      "consultationFee": { "$numberInt": "500" },
-      "opValidityDays": { "$numberInt": "30" },
-      "createdAt": { "$date": { "$numberLong": "1747914980902" } },
-      "__v": { "$numberInt": "0" }
-    },
-    {
-      "_id": { "$oid": "682f10e40f6d02675c851261" },
-      "fullName": "Dr. Priya Mehra",
-      "specialization": "Dermatology",
-      "role": "doctor",
-      "hospitalId": { "$oid": "682b636afb292ca0153f2318" },
-      "email": "priyam@gmail.com",
-      "phone": "9876543210",
-      "password": "$2b$10$abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef",
-      "opDays": ["Wednesday", "Friday"],
-      "opHours": { "start": "10:00", "end": "16:00" },
-      "avgConsultationTime": { "$numberInt": "20" },
-      "consultationFee": { "$numberInt": "400" },
-      "opValidityDays": { "$numberInt": "15" },
-      "createdAt": { "$date": { "$numberLong": "1747915980902" } },
-      "__v": { "$numberInt": "0" }
-    },
-    {
-      "_id": { "$oid": "682f10e40f6d02675c851262" },
-      "fullName": "Dr. Arjun Singh",
-      "specialization": "Neurology",
-      "role": "doctor",
-      "hospitalId": { "$oid": "682b636afb292ca0153f2318" },
-      "email": "arjun.singh@gmail.com",
-      "phone": "9123456780",
-      "password": "$2b$10$1234567890123456789012abcdefabcdefabcdefabcdefabcdef",
-      "opDays": ["Tuesday", "Thursday"],
-      "opHours": { "start": "11:00", "end": "18:00" },
-      "avgConsultationTime": { "$numberInt": "40" },
-      "consultationFee": { "$numberInt": "700" },
-      "opValidityDays": { "$numberInt": "20" },
-      "createdAt": { "$date": { "$numberLong": "1747916980902" } },
-      "__v": { "$numberInt": "0" }
-    },
-    {
-      "_id": { "$oid": "682f10e40f6d02675c851263" },
-      "fullName": "Dr. Sneha Iyer",
-      "specialization": "Pediatrics",
-      "role": "doctor",
-      "hospitalId": { "$oid": "682b636afb292ca0153f2318" },
-      "email": "sneha.iyer@gmail.com",
-      "phone": "9001234567",
-      "password": "$2b$10$zyxwvutsrqponmlkjihgfedcbaabcdefabcdefabcdefabcdef",
-      "opDays": ["Monday", "Wednesday", "Friday"],
-      "opHours": { "start": "08:00", "end": "14:00" },
-      "avgConsultationTime": { "$numberInt": "25" },
-      "consultationFee": { "$numberInt": "300" },
-      "opValidityDays": { "$numberInt": "25" },
-      "createdAt": { "$date": { "$numberLong": "1747917980902" } },
-      "__v": { "$numberInt": "0" }
-    },
-    {
-      "_id": { "$oid": "682f10e40f6d02675c851264" },
-      "fullName": "Dr. Manish Khurana",
-      "specialization": "Orthopedics",
-      "role": "doctor",
-      "hospitalId": { "$oid": "682b636afb292ca0153f2318" },
-      "email": "manishk@gmail.com",
-      "phone": "7889900112",
-      "password": "$2b$10$mnopqr1234567890stuvwxyzabcdefabcdefabcdefabcdef",
-      "opDays": ["Tuesday", "Thursday", "Saturday"],
-      "opHours": { "start": "12:00", "end": "20:00" },
-      "avgConsultationTime": { "$numberInt": "35" },
-      "consultationFee": { "$numberInt": "600" },
-      "opValidityDays": { "$numberInt": "40" },
-      "createdAt": { "$date": { "$numberLong": "1747918980902" } },
-      "__v": { "$numberInt": "0" }
-    }
-  ];
+  const { doctors } = useSelector((state) => state.doctorReducer);
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -145,7 +61,7 @@ const DoctorsList = () => {
 
       {/* Doctors List */}
       {doctors?.map((doctor) => (
-        <div key={doctor._id.$oid} className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-6 mb-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <div key={doctor._id} className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-6 mb-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
           {/* Doctor Header */}
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center">

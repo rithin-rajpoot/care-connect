@@ -1,3 +1,4 @@
+import { Activity, Calendar, Clock, FileText, MapPin } from 'lucide-react';
 import React from 'react'
 
 const Appointments = () => {

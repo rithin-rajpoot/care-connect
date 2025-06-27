@@ -31,6 +31,20 @@ export const getAllDoctorsThunk = createAsyncThunk('doctor/getAllDoctors',
     }
 );
 
+export const getDoctorsByHospitalThunk = createAsyncThunk('doctor/getDoctorsByHospital',
+    async (hospitalId, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.get(`/doctor/${hospitalId}`);
+            return response.data;
+
+        } catch (error) {
+            const errorOutput = error?.response?.data?.errMessage;
+            toast.error(errorOutput);
+            return rejectWithValue(errorOutput)
+        }
+    }
+);
+
 
 
 

@@ -21,12 +21,16 @@ import Navbar from "./Navbar.jsx";
 import { getHospitalsThunk } from "../../store/slice/hospital/hospitalThunk.js";
 import PatientProfile from "./PatientProfile.jsx";
 import Appointments from "./Appointments.jsx";
-import DoctorsList from "./DoctorList.jsx";
+import { getDoctorsByHospitalThunk } from "../../store/slice/doctor/doctorThunk.js";
+import { useNavigate } from "react-router-dom";
 
 const PatientDashboard = () => {
   const [activeTab, setActiveTab] = useState("book-appointment");
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
+
+  const [selectedHospital, setSelectedHospital] = useState(null);
+  const navigate = useNavigate();
 
   
   const { allHospitals } = useSelector((state) => state.hospitalReducer);
@@ -36,6 +40,14 @@ const PatientDashboard = () => {
        dispatch(getPatientProfileThunk());
        dispatch(getHospitalsThunk());
   },[]);
+
+  const displayDoctors = async (hospital) => {
+    setSelectedHospital(hospital);
+    const r = await dispatch(getDoctorsByHospitalThunk(hospital?._id));
+    if(r.payload.success){
+      navigate('/doctor-list');
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
@@ -173,7 +185,7 @@ const PatientDashboard = () => {
               <div className="p-6">
                 <div className="grid gap-4">
                   {allHospitals?.map((hospital) => (
-                    <div key={hospital?._id} className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer">
+                    <div key={hospital?._id} onClick={() => displayDoctors(hospital)} className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-2">

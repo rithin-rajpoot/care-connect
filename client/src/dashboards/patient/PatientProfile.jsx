@@ -1,4 +1,6 @@
+import { User } from 'lucide-react';
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 const PatientProfile = () => {
     const { patientDetails } = useSelector((state) => state.patientReducer);

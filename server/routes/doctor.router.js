@@ -1,7 +1,7 @@
 import express from 'express';
 import { userLogout } from '../controllers/userLogout.controller.js';
 import isAuthenticated from '../middlewares/isAuthenticated.middleware.js';
-import { changePassword, deleteDoctor, doctorLogin, getAllDoctors, getDoctorById, getDoctorProfile, getDoctorsBySpecialization, getDoctorStats, registerDoctor, updateDoctor, updateDoctorProfile } from '../controllers/doctor.controller.js';
+import { changePassword, deleteDoctor, doctorLogin, getAllDoctors, getDoctorById, getDoctorProfile, getDoctorsByHospital, getDoctorsBySpecialization, getDoctorStats, registerDoctor, updateDoctor, updateDoctorProfile } from '../controllers/doctor.controller.js';
 
 
 const router = express.Router();
@@ -23,6 +23,7 @@ router.get('/all-doctors', isAuthenticated, getAllDoctors);
 // router.post('/profile/logout', isAuthenticated, userLogout);
 
 // // patient use 
-router.get('/search/specialization', getDoctorsBySpecialization);
+router.get('/search/specialization', isAuthenticated, getDoctorsBySpecialization);
+router.get('/:hospitalId', isAuthenticated, getDoctorsByHospital);
 
 export default router;
