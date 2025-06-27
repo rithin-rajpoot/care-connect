@@ -7,7 +7,6 @@ const router = express.Router();
 router.post('/update-hospital', isAuthenticated, updateHospital);
 
 // patient use
-router.get('/get-all-hospitals', isAuthenticated, getAllHospitals
-);
+router.get('/get-all-hospitals', isAuthenticated, getAllHospitals);
 
 export default router;

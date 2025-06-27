@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {updateHospitalProfileThunk } from './hospitalThunk'
+import {getHospitalsThunk, updateHospitalProfileThunk } from './hospitalThunk'
 
 const initialState = {
    hospitalDetails: null,
+   allHospitals: [],
    loading: false,
 }
 
@@ -28,6 +29,20 @@ const hospitalSlice = createSlice({
       });
 
       builder.addCase(updateHospitalProfileThunk.rejected, (state) => {
+         state.loading = false;
+      });
+
+      // get Hospitals
+      builder.addCase(getHospitalsThunk.pending, (state) => {
+         state.loading = true;
+      });
+
+      builder.addCase(getHospitalsThunk.fulfilled, (state, action) => {
+         state.allHospitals = action?.payload?.responseData;
+         state.loading = false;
+      });
+
+      builder.addCase(getHospitalsThunk.rejected, (state) => {
          state.loading = false;
       });
 
