@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   User,
-  Clock,
   Calendar,
   Phone,
-  Mail,
   Heart,
-  IndianRupee,
-  X,
 } from "lucide-react";
 import { useSelector } from "react-redux";
 import DoctorCard from "./DoctorCard";
@@ -17,6 +13,7 @@ import DoctorCard from "./DoctorCard";
 // Main Doctors List Component
 const DoctorsList = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
+
 
   // Calculate next available slot
   const getNextAvailableDay = (opDays) => {
@@ -39,7 +36,7 @@ const DoctorsList = () => {
   const closeDoctorCard = () => {
     setSelectedDoctor(null);
   };
-
+  
   // Helper function to get numeric value from MongoDB format
   const getNumericValue = (value) => {
     if (typeof value === 'object' && value.$numberInt) {
@@ -47,8 +44,7 @@ const DoctorsList = () => {
     }
     return value;
   };
-
-  const { doctors } = useSelector((state) => state.doctorReducer);
+  const { hospitalWiseDoctors } = useSelector((state) => state.doctorReducer);
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -60,7 +56,7 @@ const DoctorsList = () => {
       </div>
 
       {/* Doctors List */}
-      {doctors?.map((doctor) => (
+      {hospitalWiseDoctors?.map((doctor) => (
         <div key={doctor._id} className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-6 mb-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
           {/* Doctor Header */}
           <div className="flex items-start justify-between mb-6">

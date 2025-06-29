@@ -4,6 +4,7 @@ import { getAllDoctorsThunk, getDoctorsByHospitalThunk, registerDoctorThunk } fr
 const initialState = {
    doctors:[],
    loading: false,
+   hospitalWiseDoctors: [],
 }
 
 const doctorSlice = createSlice({
@@ -30,19 +31,19 @@ const doctorSlice = createSlice({
       });
 
 
-      // builder.addCase(getAllDoctorsThunk.pending, (state, action) => {
-      //    state.loading = true;
-      // });
+      builder.addCase(getAllDoctorsThunk.pending, (state, action) => {
+         state.loading = true;
+      });
 
-      // builder.addCase(getAllDoctorsThunk.fulfilled, (state, action) => {
-      //      const doctorData = action?.payload?.responseData?.doctors;
-      //      state.doctors = doctorData;
-      //      state.loading = false;
-      // });
+      builder.addCase(getAllDoctorsThunk.fulfilled, (state, action) => {
+           const doctorData = action?.payload?.responseData?.doctors;
+           state.doctors = doctorData;
+           state.loading = false;
+      });
 
-      //  builder.addCase(getAllDoctorsThunk.rejected, (state) => {
-      //    state.loading = false;
-      // });
+       builder.addCase(getAllDoctorsThunk.rejected, (state) => {
+         state.loading = false;
+      });
 
       // For getting doctors by hospital
       builder.addCase(getDoctorsByHospitalThunk.pending, (state, action) => {
@@ -51,11 +52,11 @@ const doctorSlice = createSlice({
 
       builder.addCase(getDoctorsByHospitalThunk.fulfilled, (state, action) => {
            const doctorData = action?.payload?.responseData?.doctors;
-           state.doctors = doctorData;
+           state.hospitalWiseDoctors = doctorData;
            state.loading = false;
       });
 
-       builder.addCase(getAllDoctorsThunk.rejected, (state) => {
+       builder.addCase(getDoctorsByHospitalThunk.rejected, (state) => {
          state.loading = false;
       });
 

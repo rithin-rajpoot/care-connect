@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Footer from "../../components/Footer.jsx";
 import { 
   Calendar, 
@@ -16,25 +16,24 @@ import {
   Phone
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPatientProfileThunk, logoutPatientThunk } from "../../store/slice/patient/patientThunk.js";
+import { getPatientProfileThunk } from "../../store/slice/patient/patientThunk.js";
 import Navbar from "./Navbar.jsx";
 import { getHospitalsThunk } from "../../store/slice/hospital/hospitalThunk.js";
 import PatientProfile from "./PatientProfile.jsx";
 import Appointments from "./Appointments.jsx";
 import { getDoctorsByHospitalThunk } from "../../store/slice/doctor/doctorThunk.js";
 import { useNavigate } from "react-router-dom";
+import { setSelectedHospital } from "../../store/slice/hospital/hospitalSlice.js";
 
 const PatientDashboard = () => {
   const [activeTab, setActiveTab] = useState("book-appointment");
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
 
-  const [selectedHospital, setSelectedHospital] = useState(null);
   const navigate = useNavigate();
 
   
   const { allHospitals } = useSelector((state) => state.hospitalReducer);
-
   // GetPatient Profile
   useEffect(()=>{
        dispatch(getPatientProfileThunk());
@@ -44,10 +43,11 @@ const PatientDashboard = () => {
   const displayDoctors = async (hospital) => {
     setSelectedHospital(hospital);
     const r = await dispatch(getDoctorsByHospitalThunk(hospital?._id));
-    if(r.payload.success){
+    if(r?.payload?.success){
       navigate('/doctor-list');
     }
   }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">

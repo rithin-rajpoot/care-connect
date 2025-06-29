@@ -1,8 +1,12 @@
 import { Bell, Heart, LogOut } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutPatientThunk } from "../../store/slice/patient/patientThunk";
 
 const Navbar = () => {
   const { patientDetails } = useSelector((state) => state.patientReducer);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logoutPatientThunk());
     navigate("/patient-login");

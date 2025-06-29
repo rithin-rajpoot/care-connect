@@ -5,6 +5,9 @@ const initialState = {
    hospitalDetails: null,
    allHospitals: [],
    loading: false,
+
+   // for patient use
+   selectedHospital: JSON.parse(localStorage.getItem('selectedHospital')) || null,
 }
 
 const hospitalSlice = createSlice({
@@ -13,6 +16,10 @@ const hospitalSlice = createSlice({
    reducers: {
       setHospitalDetails: (state, action) => {
          state.hospitalDetails = action.payload;
+      },
+      setSelectedHospital: (state, action) => {
+         localStorage.setItem('selectedHospital',JSON.stringify(action.payload))
+         state.selectedHospital = action.payload;
       }
    },
 
@@ -50,6 +57,6 @@ const hospitalSlice = createSlice({
 })
 
 
-export const { setHospitalDetails} = hospitalSlice.actions;
+export const { setHospitalDetails, setSelectedHospital } = hospitalSlice.actions;
 
 export default hospitalSlice.reducer
