@@ -4,7 +4,7 @@ import { getAllDoctorsThunk, getDoctorsByHospitalThunk, registerDoctorThunk } fr
 const initialState = {
    doctors:[],
    loading: false,
-   hospitalWiseDoctors: [],
+   hospitalWiseDoctors: JSON.parse(localStorage.getItem('storeHospitalWiseDoctors')) || null,
 }
 
 const doctorSlice = createSlice({
@@ -52,6 +52,7 @@ const doctorSlice = createSlice({
 
       builder.addCase(getDoctorsByHospitalThunk.fulfilled, (state, action) => {
            const doctorData = action?.payload?.responseData?.doctors;
+           localStorage.setItem('storeHospitalWiseDoctors',JSON.stringify(doctorData))
            state.hospitalWiseDoctors = doctorData;
            state.loading = false;
       });
