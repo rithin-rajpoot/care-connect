@@ -15,7 +15,7 @@ router.get('/all-doctors', isAuthenticated, getAllDoctors);
 // router.delete('/:doctorId', isAuthenticated, deleteDoctor);
 
 // // Doctor Login
-// router.post('/login', doctorLogin);
+router.post('/login', doctorLogin);
 // // Doctor Profile Management
 // router.get('/profile/me', isAuthenticated, getDoctorProfile);
 // router.put('/profile/me', isAuthenticated, updateDoctorProfile);

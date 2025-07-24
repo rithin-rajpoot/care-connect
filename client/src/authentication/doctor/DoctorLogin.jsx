@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { ArrowLeft, Mail, Phone, KeyRound, Eye, EyeOff } from "lucide-react";
-import Footer from "../../components/Footer";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowLeft, Mail, Phone, Eye, EyeOff, Stethoscope } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginPatientThunk } from "../../store/slice/patient/patientThunk";
 import Header from "../../components/Header";
+import { loginDoctorThunk } from "../../store/slice/doctor/doctorThunk";
 
-const PatientLogin = () => {
-  const { isAuthenticated } = useSelector((state) => state.patientReducer);
+const DoctorLogin = () => {
+  const { isDoctorAuthenticated } = useSelector((state) => state.doctorReducer);
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -132,7 +131,7 @@ const PatientLogin = () => {
       // Mock API call for verifyOtp
       await new Promise((resolve) => setTimeout(resolve, 1000));
       alert("Login successful!");
-      navigate("/patient/dashboard");
+      navigate("/doctor/dashboard");
     } catch (error) {
       alert("Invalid OTP. Please try again.");
       setErrors({ otp: "Invalid OTP. Please try again." });
@@ -146,15 +145,16 @@ const PatientLogin = () => {
 
     try {
       setIsSubmitting(true);
-      const response = await dispatch(loginPatientThunk({
+      // Mock login - replace with actual dispatch call when thunk is available
+      const response = await dispatch(loginDoctorThunk({
         email: formData.email,
         password: formData.password
       }));
       
+      
       if (response?.payload?.success) {
-        navigate("/patient-dashboard");
+        navigate("/doctor-dashboard");
       } else {
-        // console.log(response?.payload)
         setErrors({ 
           general: response?.payload || "Login failed. Please check your credentials." 
         });
@@ -166,7 +166,7 @@ const PatientLogin = () => {
     }
   };
 
-  const handlePatientLogin = async (e) => {
+  const handleDoctorLogin = async (e) => {
     e.preventDefault();
     
     if (method === "phone" && isVerifyingOtp) {
@@ -192,16 +192,18 @@ const PatientLogin = () => {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/patient-dashboard");
+    if (isDoctorAuthenticated) {
+      navigate("/doctor-dashboard");
     }
-  }, [isAuthenticated, navigate]);
+  }, [isDoctorAuthenticated, navigate]);
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
       <Header />
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
-        <div className="w-full max-w-md ">
+
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
+        <div className="w-full max-w-md">
           <Link
             to="/"
             className="flex items-center mb-6 text-gray-700 hover:text-gray-900 transition-colors"
@@ -210,13 +212,16 @@ const PatientLogin = () => {
             Back to Home
           </Link>
 
-          <div className="bg-white rounded-lg shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-xl p-8">
             <div className="text-center mb-6">
+              <div className="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
+                <Stethoscope className="w-8 h-8" />
+              </div>
               <h2 className="text-2xl font-bold text-gray-800">
-                Patient Login
+                Doctor Login
               </h2>
               <p className="text-sm text-gray-500 mt-2">
-                Access your account to manage appointments
+                Access your medical practice dashboard
               </p>
             </div>
 
@@ -226,7 +231,7 @@ const PatientLogin = () => {
               </div>
             )}
 
-            <form onSubmit={handlePatientLogin}>
+            <form onSubmit={handleDoctorLogin}>
               {!isVerifyingOtp ? (
                 <>
                   <div className="mb-6">
@@ -246,7 +251,7 @@ const PatientLogin = () => {
                         <Mail className="w-4 h-4 text-blue-500" />
                         <span>Email</span>
                       </label>
-                      <label className="flex items-center space-x-2 cursor-pointer ">
+                      <label className="flex items-center space-x-2 cursor-pointer">
                         <input
                           type="radio"
                           name="loginMethod"
@@ -277,8 +282,8 @@ const PatientLogin = () => {
                         }`}
                         placeholder={
                           method === "email"
-                            ? "Enter your email"
-                            : "Enter 10-digit mobile number"
+                            ? "Enter your registered email"
+                            : "Enter your registered mobile number"
                         }
                         onChange={handleInputChange}
                       />
@@ -304,7 +309,7 @@ const PatientLogin = () => {
                           Password
                         </label>
                         <Link
-                          to="/forgot-password"
+                          to="/doctor-forgot-password"
                           className="text-sm text-blue-500 hover:underline"
                         >
                           Forgot password?
@@ -350,7 +355,7 @@ const PatientLogin = () => {
                         Processing...
                       </div>
                     ) : method === "email" ? (
-                      "Login"
+                      "Login to Dashboard"
                     ) : (
                       "Send OTP"
                     )}
@@ -419,7 +424,7 @@ const PatientLogin = () => {
                         Verifying...
                       </div>
                     ) : (
-                      "Verify & Login"
+                      "Verify & Access Dashboard"
                     )}
                   </button>
 
@@ -435,21 +440,88 @@ const PatientLogin = () => {
               )}
             </form>
 
-            <p className="text-center text-sm text-gray-600 mt-6">
-              Don't have an account?{" "}
-              <Link
-                to="/patient-register"
-                className="text-blue-500 hover:underline font-medium"
-              >
-                Register here
-              </Link>
-            </p>
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <p className="text-center text-sm text-gray-600">
+                Need to register your practice?{" "}
+                <Link
+                  to="/doctor-register"
+                  className="text-blue-500 hover:underline font-medium"
+                >
+                  Register here
+                </Link>
+              </p>
+              <p className="text-center text-xs text-gray-500 mt-2">
+                For patient login,{" "}
+                <Link
+                  to="/patient-login"
+                  className="text-blue-500 hover:underline"
+                >
+                  click here
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid md:grid-cols-4 gap-8">
+                  <div>
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="bg-blue-600 p-2 rounded-lg">
+                        <Stethoscope className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold">Care Connect</h3>
+                        <p className="text-sm text-gray-400">Smart OP Booking</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-400">
+                      Revolutionizing healthcare appointments with smart queue management.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4">For Patients</h4>
+                    <ul className="space-y-2 text-gray-400">
+                      <li>Book Appointments</li>
+                      <li>Track Queue</li>
+                      <li>Get Notifications</li>
+                      <li>Reschedule Easy</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4">For Hospitals</h4>
+                    <ul className="space-y-2 text-gray-400">
+                      <li>Manage Queues</li>
+                      <li>Doctor Profiles</li>
+                      <li>Analytics</li>
+                      <li>API Integration</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4">Contact</h4>
+                    <div className="space-y-2 text-gray-400">
+                      <div className="flex items-center space-x-2">
+                        <Phone className="h-4 w-4" />
+                        <span>+91 98765 43210</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Mail className="h-4 w-4" />
+                        <span>support@careconnect.com</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                  <p>&copy; Care Connect. All rights reserved.</p>
+                </div>
+              </div>
+            </footer>
+      
+    </div>
   );
 };
 
-export default PatientLogin;
+export default DoctorLogin;

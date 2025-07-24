@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getAllDoctorsThunk, getDoctorsByHospitalThunk, registerDoctorThunk } from './doctorThunk';
+import { getAllDoctorsThunk, getDoctorsByHospitalThunk, loginDoctorThunk, registerDoctorThunk } from './doctorThunk';
 
 const initialState = {
    doctors:[],
    loading: false,
    hospitalWiseDoctors: JSON.parse(localStorage.getItem('storeHospitalWiseDoctors')) || null,
+   doctorProfile: null,
+   isDoctorAuthenticated: false
 }
 
 const doctorSlice = createSlice({
@@ -58,6 +60,22 @@ const doctorSlice = createSlice({
       });
 
        builder.addCase(getDoctorsByHospitalThunk.rejected, (state) => {
+         state.loading = false;
+      });
+
+      // Doctor login
+      builder.addCase(loginDoctorThunk.pending, (state, action) => {
+         state.loading = true;
+      });
+
+      builder.addCase(loginDoctorThunk.fulfilled, (state, action) => {
+         console.log(action?.payload)
+           state.doctorProfile = action?.payload?.responseData?.doctor;
+           state.isDoctorAuthenticated = true;
+           state.loading = false;
+      });
+
+       builder.addCase(loginDoctorThunk.rejected, (state) => {
          state.loading = false;
       });
 

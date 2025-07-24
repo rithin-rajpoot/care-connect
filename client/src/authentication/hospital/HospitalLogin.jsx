@@ -79,13 +79,13 @@ const HospitalLogin = () => {
                   id="identifier"
                   type="email"
                   name="adminEmail"
-                  className={`w-full pl-10 pr-4 py-2 border ${errors.adminEmail ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                  className={`w-full pl-10 pr-4 py-2 border ${errors.adminEmail ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-green-500`}
                   placeholder="Enter admin email"
                   value={formData.adminEmail}
                   onChange={handleInputChange}
                   autoComplete="username"
                 />
-                <Mail size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <Mail size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-500" />
               </div>
               {errors.adminEmail && (
                 <p className="text-red-500 text-xs mt-1">{errors.adminEmail}</p>
@@ -97,9 +97,11 @@ const HospitalLogin = () => {
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   Password
                 </label>
+
+
                 <Link
                   to="/forgot-password"
-                  className="text-sm text-blue-500 hover:underline"
+                  className="text-sm text-green-500 hover:underline"
                 >
                   Forgot password?
                 </Link>
@@ -109,13 +111,13 @@ const HospitalLogin = () => {
                   id="password"
                   name="adminPassword"
                   type="password"
-                  className={`w-full pl-10 pr-4 py-2 border ${errors.adminPassword ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                  className={`w-full pl-10 pr-4 py-2 border ${errors.adminPassword ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-green-500`}
                   placeholder="Enter your password"
                   value={formData.adminPassword}
                   onChange={handleInputChange}
                   autoComplete="current-password"
                 />
-                <KeyRound size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <KeyRound size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-500" />
               </div>
               {errors.adminPassword && (
                 <p className="text-red-500 text-xs mt-1">{errors.adminPassword}</p>
@@ -124,17 +126,17 @@ const HospitalLogin = () => {
 
             <button
               type="submit"
-              className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition duration-200"
+              className="w-full py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-md transition duration-200"
               disabled={isSubmitting}
             >
-              {isSubmitting ? (<Loader className="w-5 h-5 animate-spin text-blue-500" />) : 'Login'}
+              {isSubmitting ? (<Loader className="w-5 h-5 animate-spin text-green-500" />) : 'Login'}
             </button>
           </form>
 
           <div className="text-center pt-4">
             <p className="text-sm text-gray-600">
               Don't have a hospital account?{' '}
-              <Link to="/hospital-register" className="text-blue-500 hover:underline">
+              <Link to="/hospital-register" className="text-green-500 hover:underline">
                 Register here
               </Link>
             </p>

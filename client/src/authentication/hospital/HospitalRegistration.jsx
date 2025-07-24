@@ -227,9 +227,9 @@ const HospitalRegistration = () => {
   return (
     <>
     <Header/>
-    <div className="min-h-[90vh] bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center py-6 px-2">
+    <div className="min-h-[90vh] bg-gray-50 flex items-center justify-center py-6 px-2">
       <div className="w-fit min-w-[40vw] max-w-2xl bg-white rounded-xl shadow-lg p-6 sm:p-10">
-        <Link to="/" className="flex items-center text-gray-500 hover:text-blue-400 mb-6 transition-colors">
+        <Link to="/" className="flex items-center text-gray-500 hover:text-green-400 mb-6 transition-colors">
           <ArrowLeft size={18} className="mr-2" />
           Back to Home
         </Link>
@@ -253,20 +253,20 @@ const HospitalRegistration = () => {
               <div
                 className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all duration-200
                   ${step === s
-                    ? 'bg-blue-500 border-blue-500 text-white scale-110 shadow-lg'
+                    ? 'bg-green-500 border-green-500 text-white scale-110 shadow-lg'
                     : step > s
-                    ? 'bg-blue-100 border-blue-400 text-blue-500'
+                    ? 'bg-green-100 border-green-400 text-green-500'
                     : 'bg-gray-200 border-gray-300 text-gray-400'
                   }`}
               >
-                {step > s ? <CheckCircle size={22} className="text-blue-500" /> : s}
+                {step > s ? <CheckCircle size={22} className="text-green-500" /> : s}
               </div>
-              <span className={`mt-2 text-xs sm:text-sm font-medium ${step === s ? 'text-blue-500' : 'text-gray-500'}`}>
+              <span className={`mt-2 text-xs sm:text-sm font-medium ${step === s ? 'text-green-500' : 'text-gray-500'}`}>
                 {stepLabels[idx]}
               </span>
               {s < 3 && (
                 <span className={`absolute top-5 left-1/2 w-full h-0.5 -z-10
-                  ${step > s ? 'bg-blue-400' : 'bg-gray-200'}
+                  ${step > s ? 'bg-green-400' : 'bg-gray-200'}
                 `} style={{ right: '-50%', left: '50%' }} />
               )}
             </li>
@@ -286,13 +286,13 @@ const HospitalRegistration = () => {
                     id="name"
                     name="hospitalName"
                     type="text"
-                    className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-blue-400 transition
-                      ${errors.hospitalName ? "border-red-300" : "border-gray-300 focus:border-blue-400"}`}
+                    className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-green-400 transition
+                      ${errors.hospitalName ? "border-red-300" : "border-gray-300 focus:border-green-400"}`}
                     placeholder="Enter hospital name"
                     value={formData.hospitalName}
                     onChange={handleChange}
                   />
-                  <Building size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-300" />
+                  <Building size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500" />
                 </div>
                 {errors.hospitalName && (
                   <p className="text-sm text-red-600 mt-1">{errors.hospitalName}</p>
@@ -308,13 +308,13 @@ const HospitalRegistration = () => {
                     id="registrationId"
                     name="registrationId"
                     type="text"
-                    className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-blue-400 transition
-                      ${errors.registrationId ? "border-red-300" : "border-gray-300 focus:border-blue-400"}`}
+                    className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-green-400 transition
+                      ${errors.registrationId ? "border-red-300" : "border-gray-300 focus:border-green-400"}`}
                     placeholder="Enter registration ID"
                     value={formData.registrationId}
                     onChange={handleChange}
                   />
-                  <Building size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-300" />
+                  <Building size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500" />
                 </div>
                 {errors.registrationId && (
                   <p className="text-sm text-red-600 mt-1">{errors.registrationId}</p>
@@ -328,8 +328,8 @@ const HospitalRegistration = () => {
                 <select
                   id="type"
                   name="hospitalType"
-                  className={`w-full h-fit py-2 px-3 rounded-lg border focus:ring-2 focus:ring-blue-400 transition
-                    ${errors.hospitalType ? "border-red-300" : "border-gray-300 focus:border-blue-400"}`}
+                  className={`w-full h-fit py-2 px-3 rounded-lg border focus:ring-2 focus:ring-green-400 transition
+                    ${errors.hospitalType ? "border-red-300" : "border-gray-300 focus:border-green-400"}`}
                   value={formData.hospitalType}
                   onChange={handleChange}
                 >
@@ -353,13 +353,13 @@ const HospitalRegistration = () => {
                       id="email"
                       name="hospitalEmail"
                       type="email"
-                      className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-blue-400 transition
-                        ${errors.hospitalEmail ? "border-red-300" : "border-gray-300 focus:border-blue-400"}`}
+                      className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-green-400 transition
+                        ${errors.hospitalEmail ? "border-red-300" : "border-gray-300 focus:border-green-400"}`}
                       placeholder="Enter contact email"
                       value={formData.hospitalEmail}
                       onChange={handleChange}
                     />
-                    <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-300" />
+                    <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500" />
                   </div>
                   {errors.hospitalEmail && (
                     <p className="text-sm text-red-600 mt-1">{errors.hospitalEmail}</p>
@@ -374,13 +374,13 @@ const HospitalRegistration = () => {
                       id="phone"
                       name="hospitalPhno"
                       type="tel"
-                      className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-blue-400 transition
-                        ${errors.hospitalPhno ? "border-red-300" : "border-gray-300 focus:border-blue-400"}`}
+                      className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-green-400 transition
+                        ${errors.hospitalPhno ? "border-red-300" : "border-gray-300 focus:border-green-400"}`}
                       placeholder="Enter contact phone"
                       value={formData.hospitalPhno}
                       onChange={handleChange}
                     />
-                    <Phone size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-300" />
+                    <Phone size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500" />
                   </div>
                   {errors.hospitalPhno && (
                     <p className="text-sm text-red-600 mt-1">{errors.hospitalPhno}</p>
@@ -404,7 +404,7 @@ const HospitalRegistration = () => {
                   // disabled={isUpdatingProfile} // <- disable input when updating profile
                 />
           </div>
-               <button className="flex gap-2 items-center bg-blue-500 p-2 text-white rounded-md cursor-pointer" onClick={handleImageButton}> Upload Logo <Camera className="text-white size-4" /></button>
+               <button className="flex gap-2 items-center bg-green-500 p-2 text-white rounded-md cursor-pointer" onClick={handleImageButton}> Upload Logo <Camera className="text-white size-4" /></button>
         </div>
                
               <div className="mb-8">
@@ -415,13 +415,13 @@ const HospitalRegistration = () => {
                   <textarea
                     id="address"
                     name="hospitalAddress"
-                    className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-blue-400 transition min-h-[80px]
-                      ${errors.hospitalAddress ? "border-red-300" : "border-gray-300 focus:border-blue-400"}`}
+                    className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-green-400 transition min-h-[80px]
+                      ${errors.hospitalAddress ? "border-red-300" : "border-gray-300 focus:border-green-400"}`}
                     placeholder="Enter complete hospital address"
                     value={formData.hospitalAddress}
                     onChange={handleChange}
                   />
-                  <MapPin size={18} className="absolute left-3 top-6 text-blue-300" />
+                  <MapPin size={18} className="absolute left-3 top-6 text-green-500" />
                 </div>
                 {errors.hospitalAddress && (
                   <p className="text-sm text-red-600 mt-1">{errors.hospitalAddress}</p>
@@ -431,7 +431,7 @@ const HospitalRegistration = () => {
               <button
                 type="button"
                 onClick={nextStep}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2.5 rounded-lg shadow transition-colors text-lg"
+                className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 rounded-lg shadow transition-colors text-lg"
               >
                 Continue
               </button>
@@ -449,13 +449,13 @@ const HospitalRegistration = () => {
                     id="adminName"
                     name="adminName"
                     type="text"
-                    className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-blue-400 transition
-                      ${errors.adminName ? "border-red-300" : "border-gray-300 focus:border-blue-400"}`}
+                    className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-green-400 transition
+                      ${errors.adminName ? "border-red-300" : "border-gray-300 focus:border-green-400"}`}
                     placeholder="Enter admin's full name"
                     value={formData.adminName}
                     onChange={handleChange}
                   />
-                  <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-300" />
+                  <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500" />
                 </div>
                 {errors.adminName && (
                   <p className="text-sm text-red-600 mt-1">{errors.adminName}</p>
@@ -470,13 +470,13 @@ const HospitalRegistration = () => {
                     id="adminEmail"
                     name="adminEmail"
                     type="email"
-                    className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-blue-400 transition
-                      ${errors.adminEmail ? "border-red-300" : "border-gray-300 focus:border-blue-400"}`}
+                    className={`w-full pl-10 pr-3 py-2 rounded-lg border focus:ring-2 focus:ring-green-400 transition
+                      ${errors.adminEmail ? "border-red-300" : "border-gray-300 focus:border-green-400"}`}
                     placeholder="Enter admin's email"
                     value={formData.adminEmail}
                     onChange={handleChange}
                   />
-                  <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-300" />
+                  <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500" />
                 </div>
                 {errors.adminEmail && (
                   <p className="text-sm text-red-600 mt-1">{errors.adminEmail}</p>
@@ -491,13 +491,13 @@ const HospitalRegistration = () => {
                     id="adminPassword"
                     name="adminPassword"
                     type={showPassword ? "text" : "password"}
-                    className={`w-full pl-10 pr-10 py-2 rounded-lg border focus:ring-2 focus:ring-blue-400 transition
-                      ${errors.adminPassword ? "border-red-300" : "border-gray-300 focus:border-blue-400"}`}
+                    className={`w-full pl-10 pr-10 py-2 rounded-lg border focus:ring-2 focus:ring-green-400 transition
+                      ${errors.adminPassword ? "border-red-300" : "border-gray-300 focus:border-green-400"}`}
                     placeholder="Create admin password"
                     value={formData.adminPassword}
                     onChange={handleChange}
                   />
-                  <KeyRound size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-300" />
+                  <KeyRound size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500" />
                   <button
                     type="button"
                     className="absolute right-3 top-1/2 transform -translate-y-1/2"
@@ -518,14 +518,14 @@ const HospitalRegistration = () => {
                 <button
                   type="button"
                   onClick={prevStep}
-                  className="flex-1 bg-white border border-blue-500 text-blue-500 font-bold py-2.5 rounded-lg shadow hover:bg-blue-50 transition-colors text-lg"
+                  className="flex-1 bg-white border border-green-500 text-green-500 font-bold py-2.5 rounded-lg shadow hover:bg-green-50 transition-colors text-lg"
                 >
                   Back
                 </button>
                 <button
                   type="button"
                   onClick={nextStep}
-                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2.5 rounded-lg shadow transition-colors text-lg"
+                  className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 rounded-lg shadow transition-colors text-lg"
                 >
                   Continue
                 </button>
@@ -536,18 +536,18 @@ const HospitalRegistration = () => {
           {step === 3 && (
             <div className="text-center">
               <div className="mb-6">
-                <div className="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center text-blue-500 mb-4">
+                <div className="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-4">
                   <CheckCircle size={32} />
                 </div>
-                <h2 className="text-xl font-semibold mb-2 text-blue-500">Complete Registration</h2>
+                <h2 className="text-xl font-semibold mb-2 text-green-500">Complete Registration</h2>
                 <p className="text-gray-600 mb-6">
                   Your hospital details have been collected. Please review and submit to complete the registration process.
                 </p>
-                <div className="bg-blue-50 p-4 rounded-lg text-left mb-6">
-                  <p className="text-sm text-blue-500 mb-2">
+                <div className="bg-green-50 p-4 rounded-lg text-left mb-6">
+                  <p className="text-sm text-green-500 mb-2">
                     By registering, you acknowledge that:
                   </p>
-                  <ul className="list-disc list-inside text-sm text-blue-500 space-y-1">
+                  <ul className="list-disc list-inside text-sm text-green-500 space-y-1">
                     <li>All information provided is accurate and true</li>
                     <li>Your hospital registration will be verified by our team</li>
                     <li>You agree to our terms of service and privacy policy</li>
@@ -558,14 +558,14 @@ const HospitalRegistration = () => {
                 <button
                   type="button"
                   onClick={prevStep}
-                  className="flex-1 bg-white border border-blue-500 text-blue-500 font-bold py-2.5 rounded-lg shadow hover:bg-blue-50 transition-colors text-lg"
+                  className="flex-1 bg-white border border-green-500 text-green-500 font-bold py-2.5 rounded-lg shadow hover:bg-green-50 transition-colors text-lg"
                 >
                   Back
                 </button>
                 {/* Main button to submit form */}
                 <button
                   type="submit"
-                  className="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2.5 rounded-lg shadow transition-colors text-lg"
+                  className="flex-1 bg-green-500 hover:bg-green-700 text-white font-bold py-2.5 rounded-lg shadow transition-colors text-lg"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -582,7 +582,7 @@ const HospitalRegistration = () => {
         <div className="mt-8 text-center">
           <p className="text-gray-600">
             Already registered?{' '}
-            <Link to="/hospital-login" className="text-blue-500 hover:underline font-semibold">
+            <Link to="/hospital-login" className="text-green-500 hover:underline font-semibold">
               Login here
             </Link>
           </p>

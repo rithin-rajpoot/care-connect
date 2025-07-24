@@ -45,7 +45,19 @@ export const getDoctorsByHospitalThunk = createAsyncThunk('doctor/getDoctorsByHo
     }
 );
 
-
+export const loginDoctorThunk = createAsyncThunk('doctor/loginDoctor',
+    async (formData, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.post('/doctor/login', formData);
+            toast.success(response?.data?.message);
+            return response.data;
+        } catch (error) {
+            const errorOutput = error?.response?.data?.errMessage;
+            toast.error(errorOutput);
+            return rejectWithValue(errorOutput)
+        }
+    }
+);
 
 
 

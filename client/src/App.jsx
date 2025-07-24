@@ -11,6 +11,8 @@ import AdminDashBoard from './dashboards/admin/AdminDashBoard';
 import DoctorForm from './dashboards/admin/DoctorForm';
 import Dashboard from './home/Dashboard';
 import DoctorsList from './dashboards/patient/DoctorList';
+import DoctorLogin from './authentication/doctor/DoctorLogin';
+import DoctorDashboard from './dashboards/doctor/DoctorDashboard';
 const App = () => {
   return (
     <>
@@ -19,12 +21,17 @@ const App = () => {
         <Route path="/" element={ <Dashboard/>}/>
         <Route path="/patient-login" element={<PatientLogin />} />
         <Route path="/patient-register" element={<PatientRegistration /> } />
+
         <Route path="/hospital-login" element={<HospitalLogin />} />
         <Route path="/hospital-register" element={<HospitalRegistration />} />
+        <Route path="/add-doctor" element={<DoctorForm />} />
+
+        <Route path='doctor-list' element={<DoctorsList />} />
+        <Route path='doctor-login' element={<DoctorLogin />} />
+
         <Route path="/patient-dashboard" element={<PatientDashBoard />} />
         <Route path="/admin-dashboard" element={<AdminDashBoard />} />
-        <Route path="/add-doctor" element={<DoctorForm />} />
-        <Route path='doctor-list' element={<DoctorsList />} />
+        <Route path="/doctor-dashboard" element={<DoctorDashboard /> } />
       </Routes>
     </>
   )
